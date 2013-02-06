@@ -48,7 +48,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JPanel" name="cmb_reboot">
+        <Container class="javax.swing.JPanel" name="pnl_information">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Information">
@@ -345,6 +345,11 @@
                 <Property name="text" type="java.lang.String" value="Size : "/>
               </Properties>
             </Component>
+            <Component class="javax.swing.JLabel" name="lbl_x">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="X"/>
+              </Properties>
+            </Component>
             <Component class="javax.swing.JTextField" name="tf_width">
               <Properties>
                 <Property name="text" type="java.lang.String" value="320"/>
@@ -353,17 +358,25 @@
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tf_width_focuslost"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbl_x">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="X"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="tf_height">
               <Properties>
                 <Property name="text" type="java.lang.String" value="240"/>
               </Properties>
               <Events>
                 <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tf_height_focuslost"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbl_labelGap">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Label Gap : "/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="tf_labelGap">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="2"/>
+              </Properties>
+              <Events>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tf_labelGap_focuslost"/>
               </Events>
             </Component>
             <Component class="javax.swing.JCheckBox" name="cb_resizable">
@@ -392,22 +405,9 @@
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cb_useLabelIcons_statechanged"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbl_labelGap">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Label Gap : "/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="tf_labelGap">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="2"/>
-              </Properties>
-              <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tf_labelGap_focuslost"/>
-              </Events>
-            </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="pnl_lang">
+        <Container class="javax.swing.JPanel" name="pnl_languages">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Language">
@@ -423,25 +423,25 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbl_lang" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_pnlLanguagesDescription" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="sp_langs" min="-2" pref="109" max="-2" attributes="0"/>
+                                      <Component id="sp_avilableLanguages" min="-2" pref="109" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="btn_addLang" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
-                                          <Component id="btn_removeLang" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
+                                          <Component id="btn_selectLang" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
+                                          <Component id="btn_deselectLang" alignment="0" min="-2" pref="55" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <Component id="lbl_selectedLangs" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_avilableLanguages" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbl_langs" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="sp_selectedLangs" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Component id="lbl_selectedLanguages" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="sp_selectedLanguages" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -453,22 +453,22 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lbl_lang" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_pnlLanguagesDescription" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                              <Component id="btn_addLang" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_selectLang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btn_removeLang" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_deselectLang" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="sp_selectedLangs" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="sp_langs" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="sp_selectedLanguages" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="sp_avilableLanguages" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lbl_selectedLangs" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_langs" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_avilableLanguages" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_selectedLanguages" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="63" max="32767" attributes="0"/>
                   </Group>
@@ -476,19 +476,19 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lbl_lang">
+            <Component class="javax.swing.JLabel" name="lbl_pnlLanguagesDescription">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Language : "/>
               </Properties>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="sp_langs">
+            <Container class="javax.swing.JScrollPane" name="sp_avilableLanguages">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JList" name="lst_langs">
+                <Component class="javax.swing.JList" name="lst_avilableLanguages">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                       <StringArray count="0"/>
@@ -497,30 +497,14 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="btn_addLang">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_addLang_pressed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btn_removeLang">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_removeLang_pressed"/>
-              </Events>
-            </Component>
-            <Container class="javax.swing.JScrollPane" name="sp_selectedLangs">
+            <Container class="javax.swing.JScrollPane" name="sp_selectedLanguages">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JList" name="lst_selectedLangs">
+                <Component class="javax.swing.JList" name="lst_selectedLanguages">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                       <StringArray count="0"/>
@@ -529,15 +513,31 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="lbl_langs">
+            <Component class="javax.swing.JLabel" name="lbl_selectedLanguages">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Used in Project"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbl_selectedLangs">
+            <Component class="javax.swing.JLabel" name="lbl_avilableLanguages">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Languages"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_selectLang">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_selectLang_pressed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_deselectLang">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_deselectLang_pressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -556,7 +556,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="sp_res" alignment="0" pref="409" max="32767" attributes="0"/>
+                          <Component id="sp_resources" alignment="0" pref="409" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
@@ -566,7 +566,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btn_delResource" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="lbl_res" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_pnlResourcesDescription" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -579,9 +579,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                      <Component id="lbl_res" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_pnlResourcesDescription" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="sp_res" min="-2" max="-2" attributes="0"/>
+                      <Component id="sp_resources" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="61" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btn_addResource" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -594,14 +594,14 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JScrollPane" name="sp_res">
+            <Container class="javax.swing.JScrollPane" name="sp_resources">
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JList" name="lst_res">
+                <Component class="javax.swing.JList" name="lst_resources">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                       <StringArray count="0"/>
@@ -661,7 +661,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_editResource_pressed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbl_res">
+            <Component class="javax.swing.JLabel" name="lbl_pnlResourcesDescription">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Resources : "/>
               </Properties>
@@ -693,7 +693,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btn_delJar" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="lbl_jars" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_pnlJarsDescription" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -706,7 +706,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                      <Component id="lbl_jars" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_pnlJarsDescription" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="sp_jars" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="61" max="32767" attributes="0"/>
@@ -788,7 +788,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_delJar_pressed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbl_jars">
+            <Component class="javax.swing.JLabel" name="lbl_pnlJarsDescription">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Jars : "/>
               </Properties>
@@ -811,7 +811,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="lbl_panels" min="-2" max="-2" attributes="0"/>
+                              <Component id="lbl_pnlPanelsDescription" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
@@ -826,24 +826,24 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Component id="sp_aPanels" min="-2" pref="109" max="-2" attributes="0"/>
+                                              <Component id="sp_avilablePanels" min="-2" pref="109" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="btn_right" min="-2" pref="55" max="-2" attributes="0"/>
-                                                  <Component id="btn_left" min="-2" pref="55" max="-2" attributes="0"/>
+                                                  <Component id="btn_selectPanel" min="-2" pref="55" max="-2" attributes="0"/>
+                                                  <Component id="btn_deselectPanel" min="-2" pref="55" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <Component id="lbl_avilable" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbl_avilablePanels" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="lbl_used" min="-2" max="-2" attributes="0"/>
+                                          <Component id="lbl_selectedPanels" min="-2" max="-2" attributes="0"/>
                                           <Group type="102" alignment="0" attributes="0">
-                                              <Component id="sp_used" min="-2" pref="109" max="-2" attributes="0"/>
+                                              <Component id="sp_selectedPanels" min="-2" pref="109" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="jButton1" max="32767" attributes="0"/>
-                                                  <Component id="jButton2" max="32767" attributes="0"/>
+                                                  <Component id="btn_setUpper" max="32767" attributes="0"/>
+                                                  <Component id="btn_setLower" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -859,33 +859,33 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lbl_panels" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_pnlPanelsDescription" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Component id="btn_right" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_selectPanel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btn_left" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_deselectPanel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="sp_used" min="-2" max="-2" attributes="0"/>
+                              <Component id="sp_selectedPanels" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_setLower" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="btn_setUpper" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="sp_aPanels" min="-2" max="-2" attributes="0"/>
+                              <Component id="sp_avilablePanels" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lbl_avilable" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_used" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_avilablePanels" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_selectedPanels" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -899,12 +899,12 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lbl_panels">
+            <Component class="javax.swing.JLabel" name="lbl_pnlPanelsDescription">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Panels : "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btn_right">
+            <Component class="javax.swing.JButton" name="btn_selectPanel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
               </Properties>
@@ -912,7 +912,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_addPanel_pressed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btn_left">
+            <Component class="javax.swing.JButton" name="btn_deselectPanel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
               </Properties>
@@ -920,7 +920,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_removePanel"/>
               </Events>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="sp_used">
+            <Container class="javax.swing.JScrollPane" name="sp_selectedPanels">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -930,7 +930,26 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JList" name="lst_used">
+                <Component class="javax.swing.JList" name="lst_selectedPanels">
+                  <Properties>
+                    <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
+                      <StringArray count="0"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Container class="javax.swing.JScrollPane" name="sp_avilablePanels">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JList" name="lst_avilablePanels">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                       <StringArray count="0"/>
@@ -981,45 +1000,26 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbl_avilable">
+            <Component class="javax.swing.JLabel" name="lbl_avilablePanels">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Avilable Panels"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbl_used">
+            <Component class="javax.swing.JLabel" name="lbl_selectedPanels">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Used In Project"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="btn_setUpper">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x2193;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton2">
+            <Component class="javax.swing.JButton" name="btn_setLower">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x2191;"/>
               </Properties>
             </Component>
-            <Container class="javax.swing.JScrollPane" name="sp_aPanels">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-              </AuxValues>
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-              <SubComponents>
-                <Component class="javax.swing.JList" name="lst_aPanels">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="0"/>
-                    </Property>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="pnl_packs">

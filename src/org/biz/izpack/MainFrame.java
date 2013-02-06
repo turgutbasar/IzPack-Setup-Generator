@@ -86,13 +86,13 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private void populateLstResources() {
-        ((DefaultListModel<Resource>)lst_res.getModel()).removeAllElements();
+        ((DefaultListModel<Resource>)lst_resources.getModel()).removeAllElements();
         Resource[] resources = installation.getResources().getAllResources();
         if (resources.length == 0) {
             return;
         }
         for (Resource itr : resources) {
-            ((DefaultListModel<Resource>)lst_res.getModel()).addElement(itr);
+            ((DefaultListModel<Resource>)lst_resources.getModel()).addElement(itr);
         }
     }
     
@@ -128,12 +128,12 @@ public class MainFrame extends javax.swing.JFrame {
     
     private void initLists() {
         // Lack of other lists
-        lst_langs.setModel(new DefaultListModel<LangPack>());
-        lst_selectedLangs.setModel(new DefaultListModel<LangPack>());
-        lst_res.setModel(new DefaultListModel<Resource>());
+        lst_avilableLanguages.setModel(new DefaultListModel<LangPack>());
+        lst_selectedLanguages.setModel(new DefaultListModel<LangPack>());
+        lst_resources.setModel(new DefaultListModel<Resource>());
         lst_jars.setModel(new DefaultListModel<Jar>()); 
-        lst_aPanels.setModel(new DefaultListModel<Panel>());
-        lst_used.setModel(new DefaultListModel<Panel>());
+        lst_avilablePanels.setModel(new DefaultListModel<Panel>());
+        lst_selectedPanels.setModel(new DefaultListModel<Panel>());
     }
         
     private void initLangs() {
@@ -143,15 +143,15 @@ public class MainFrame extends javax.swing.JFrame {
         fr.setName("fra");
         LangPack en = new LangPack();
         en.setName("eng");
-        ((DefaultListModel<LangPack>)lst_langs.getModel()).addElement(tr);
-        ((DefaultListModel<LangPack>)lst_langs.getModel()).addElement(en);
-        ((DefaultListModel<LangPack>)lst_langs.getModel()).addElement(fr);
+        ((DefaultListModel<LangPack>)lst_avilableLanguages.getModel()).addElement(tr);
+        ((DefaultListModel<LangPack>)lst_avilableLanguages.getModel()).addElement(en);
+        ((DefaultListModel<LangPack>)lst_avilableLanguages.getModel()).addElement(fr);
     }
     
     private void initPacks() {
         Panel panel = new Panel();
         panel.setClassName("HelloPanel");
-        ((DefaultListModel<Panel>)lst_aPanels.getModel()).addElement(panel);
+        ((DefaultListModel<Panel>)lst_avilablePanels.getModel()).addElement(panel);
     }
 
     /**
@@ -164,7 +164,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         tpnl_mainTabbedPanel = new javax.swing.JTabbedPane();
-        cmb_reboot = new javax.swing.JPanel();
+        pnl_information = new javax.swing.JPanel();
         lbl_applicationName = new javax.swing.JLabel();
         tf_applicationName = new javax.swing.JTextField();
         lbl_version = new javax.swing.JLabel();
@@ -181,53 +181,53 @@ public class MainFrame extends javax.swing.JFrame {
         lbl_rebootOption = new javax.swing.JLabel();
         pnl_gui = new javax.swing.JPanel();
         lbl_size = new javax.swing.JLabel();
-        tf_width = new javax.swing.JTextField();
         lbl_x = new javax.swing.JLabel();
+        tf_width = new javax.swing.JTextField();
         tf_height = new javax.swing.JTextField();
+        lbl_labelGap = new javax.swing.JLabel();
+        tf_labelGap = new javax.swing.JTextField();
         cb_resizable = new javax.swing.JCheckBox();
         cb_useButtonIcons = new javax.swing.JCheckBox();
         cb_useLabelIcons = new javax.swing.JCheckBox();
-        lbl_labelGap = new javax.swing.JLabel();
-        tf_labelGap = new javax.swing.JTextField();
-        pnl_lang = new javax.swing.JPanel();
-        lbl_lang = new javax.swing.JLabel();
-        sp_langs = new javax.swing.JScrollPane();
-        lst_langs = new javax.swing.JList();
-        btn_addLang = new javax.swing.JButton();
-        btn_removeLang = new javax.swing.JButton();
-        sp_selectedLangs = new javax.swing.JScrollPane();
-        lst_selectedLangs = new javax.swing.JList();
-        lbl_langs = new javax.swing.JLabel();
-        lbl_selectedLangs = new javax.swing.JLabel();
+        pnl_languages = new javax.swing.JPanel();
+        lbl_pnlLanguagesDescription = new javax.swing.JLabel();
+        sp_avilableLanguages = new javax.swing.JScrollPane();
+        lst_avilableLanguages = new javax.swing.JList();
+        sp_selectedLanguages = new javax.swing.JScrollPane();
+        lst_selectedLanguages = new javax.swing.JList();
+        lbl_selectedLanguages = new javax.swing.JLabel();
+        lbl_avilableLanguages = new javax.swing.JLabel();
+        btn_selectLang = new javax.swing.JButton();
+        btn_deselectLang = new javax.swing.JButton();
         pnl_resources = new javax.swing.JPanel();
-        sp_res = new javax.swing.JScrollPane();
-        lst_res = new javax.swing.JList();
+        sp_resources = new javax.swing.JScrollPane();
+        lst_resources = new javax.swing.JList();
         btn_addResource = new javax.swing.JButton();
         btn_delResource = new javax.swing.JButton();
         btn_editResource = new javax.swing.JButton();
-        lbl_res = new javax.swing.JLabel();
+        lbl_pnlResourcesDescription = new javax.swing.JLabel();
         pnl_jars = new javax.swing.JPanel();
         sp_jars = new javax.swing.JScrollPane();
         lst_jars = new javax.swing.JList();
         btn_addJar = new javax.swing.JButton();
         btn_editJar = new javax.swing.JButton();
         btn_delJar = new javax.swing.JButton();
-        lbl_jars = new javax.swing.JLabel();
+        lbl_pnlJarsDescription = new javax.swing.JLabel();
         pnl_panels = new javax.swing.JPanel();
-        lbl_panels = new javax.swing.JLabel();
-        btn_right = new javax.swing.JButton();
-        btn_left = new javax.swing.JButton();
-        sp_used = new javax.swing.JScrollPane();
-        lst_used = new javax.swing.JList();
+        lbl_pnlPanelsDescription = new javax.swing.JLabel();
+        btn_selectPanel = new javax.swing.JButton();
+        btn_deselectPanel = new javax.swing.JButton();
+        sp_selectedPanels = new javax.swing.JScrollPane();
+        lst_selectedPanels = new javax.swing.JList();
+        sp_avilablePanels = new javax.swing.JScrollPane();
+        lst_avilablePanels = new javax.swing.JList();
         btn_addPanel = new javax.swing.JButton();
         btn_editPanel = new javax.swing.JButton();
         btn_delPanel = new javax.swing.JButton();
-        lbl_avilable = new javax.swing.JLabel();
-        lbl_used = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        sp_aPanels = new javax.swing.JScrollPane();
-        lst_aPanels = new javax.swing.JList();
+        lbl_avilablePanels = new javax.swing.JLabel();
+        lbl_selectedPanels = new javax.swing.JLabel();
+        btn_setUpper = new javax.swing.JButton();
+        btn_setLower = new javax.swing.JButton();
         pnl_packs = new javax.swing.JPanel();
         sp_packs = new javax.swing.JScrollPane();
         tree_packs = new javax.swing.JTree();
@@ -321,26 +321,26 @@ public class MainFrame extends javax.swing.JFrame {
 
         lbl_rebootOption.setText("Reboot Option : ");
 
-        javax.swing.GroupLayout cmb_rebootLayout = new javax.swing.GroupLayout(cmb_reboot);
-        cmb_reboot.setLayout(cmb_rebootLayout);
-        cmb_rebootLayout.setHorizontalGroup(
-            cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cmb_rebootLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnl_informationLayout = new javax.swing.GroupLayout(pnl_information);
+        pnl_information.setLayout(pnl_informationLayout);
+        pnl_informationLayout.setHorizontalGroup(
+            pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_informationLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cb_runPrivilaged)
-                    .addGroup(cmb_rebootLayout.createSequentialGroup()
-                        .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_informationLayout.createSequentialGroup()
+                        .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbl_applicationName)
                             .addComponent(lbl_version)
                             .addComponent(lbl_authors)
                             .addComponent(lbl_url)
                             .addComponent(lbl_rebootOption))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cb_rebootOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(cmb_rebootLayout.createSequentialGroup()
-                                .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnl_informationLayout.createSequentialGroup()
+                                .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tf_applicationName, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                                     .addComponent(tf_version)
                                     .addComponent(cb_authors, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -353,34 +353,34 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(tf_url, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
-        cmb_rebootLayout.setVerticalGroup(
-            cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cmb_rebootLayout.createSequentialGroup()
+        pnl_informationLayout.setVerticalGroup(
+            pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_informationLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_applicationName)
                     .addComponent(tf_applicationName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_version)
                     .addComponent(tf_version, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cmb_rebootLayout.createSequentialGroup()
-                        .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_informationLayout.createSequentialGroup()
+                        .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_authors)
                             .addComponent(cb_authors, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12)
-                        .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_url)
                             .addComponent(tf_url, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cmb_rebootLayout.createSequentialGroup()
-                        .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_informationLayout.createSequentialGroup()
+                        .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_addAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_editAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_delAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)))
-                .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_rebootOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_rebootOption))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -388,9 +388,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(83, Short.MAX_VALUE))
         );
 
-        tpnl_mainTabbedPanel.addTab("Information", cmb_reboot);
+        tpnl_mainTabbedPanel.addTab("Information", pnl_information);
 
         lbl_size.setText("Size : ");
+
+        lbl_x.setText("X");
 
         tf_width.setText("320");
         tf_width.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -399,12 +401,19 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        lbl_x.setText("X");
-
         tf_height.setText("240");
         tf_height.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tf_height_focuslost(evt);
+            }
+        });
+
+        lbl_labelGap.setText("Label Gap : ");
+
+        tf_labelGap.setText("2");
+        tf_labelGap.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tf_labelGap_focuslost(evt);
             }
         });
 
@@ -428,15 +437,6 @@ public class MainFrame extends javax.swing.JFrame {
         cb_useLabelIcons.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cb_useLabelIcons_statechanged(evt);
-            }
-        });
-
-        lbl_labelGap.setText("Label Gap : ");
-
-        tf_labelGap.setText("2");
-        tf_labelGap.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                tf_labelGap_focuslost(evt);
             }
         });
 
@@ -488,79 +488,79 @@ public class MainFrame extends javax.swing.JFrame {
 
         tpnl_mainTabbedPanel.addTab("GUI Settings", pnl_gui);
 
-        lbl_lang.setText("Language : ");
+        lbl_pnlLanguagesDescription.setText("Language : ");
 
-        sp_langs.setViewportView(lst_langs);
+        sp_avilableLanguages.setViewportView(lst_avilableLanguages);
 
-        btn_addLang.setText(">>");
-        btn_addLang.addActionListener(new java.awt.event.ActionListener() {
+        sp_selectedLanguages.setViewportView(lst_selectedLanguages);
+
+        lbl_selectedLanguages.setText("Used in Project");
+
+        lbl_avilableLanguages.setText("Languages");
+
+        btn_selectLang.setText(">>");
+        btn_selectLang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_addLang_pressed(evt);
+                btn_selectLang_pressed(evt);
             }
         });
 
-        btn_removeLang.setText("<<");
-        btn_removeLang.addActionListener(new java.awt.event.ActionListener() {
+        btn_deselectLang.setText("<<");
+        btn_deselectLang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_removeLang_pressed(evt);
+                btn_deselectLang_pressed(evt);
             }
         });
 
-        sp_selectedLangs.setViewportView(lst_selectedLangs);
-
-        lbl_langs.setText("Used in Project");
-
-        lbl_selectedLangs.setText("Languages");
-
-        javax.swing.GroupLayout pnl_langLayout = new javax.swing.GroupLayout(pnl_lang);
-        pnl_lang.setLayout(pnl_langLayout);
-        pnl_langLayout.setHorizontalGroup(
-            pnl_langLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_langLayout.createSequentialGroup()
-                .addGroup(pnl_langLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_langLayout.createSequentialGroup()
+        javax.swing.GroupLayout pnl_languagesLayout = new javax.swing.GroupLayout(pnl_languages);
+        pnl_languages.setLayout(pnl_languagesLayout);
+        pnl_languagesLayout.setHorizontalGroup(
+            pnl_languagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_languagesLayout.createSequentialGroup()
+                .addGroup(pnl_languagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_languagesLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lbl_lang))
-                    .addGroup(pnl_langLayout.createSequentialGroup()
+                        .addComponent(lbl_pnlLanguagesDescription))
+                    .addGroup(pnl_languagesLayout.createSequentialGroup()
                         .addGap(62, 62, 62)
-                        .addGroup(pnl_langLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnl_langLayout.createSequentialGroup()
-                                .addComponent(sp_langs, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(pnl_languagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnl_languagesLayout.createSequentialGroup()
+                                .addComponent(sp_avilableLanguages, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(pnl_langLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btn_addLang, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btn_removeLang, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lbl_selectedLangs))
+                                .addGroup(pnl_languagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn_selectLang, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn_deselectLang, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lbl_avilableLanguages))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnl_langLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_langs)
-                            .addComponent(sp_selectedLangs, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(pnl_languagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_selectedLanguages)
+                            .addComponent(sp_selectedLanguages, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(82, Short.MAX_VALUE))
         );
-        pnl_langLayout.setVerticalGroup(
-            pnl_langLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_langLayout.createSequentialGroup()
+        pnl_languagesLayout.setVerticalGroup(
+            pnl_languagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_languagesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_lang)
+                .addComponent(lbl_pnlLanguagesDescription)
                 .addGap(18, 18, 18)
-                .addGroup(pnl_langLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnl_langLayout.createSequentialGroup()
+                .addGroup(pnl_languagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_languagesLayout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(btn_addLang)
+                        .addComponent(btn_selectLang)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_removeLang))
-                    .addComponent(sp_selectedLangs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sp_langs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_deselectLang))
+                    .addComponent(sp_selectedLanguages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sp_avilableLanguages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_langLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_selectedLangs)
-                    .addComponent(lbl_langs))
+                .addGroup(pnl_languagesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_avilableLanguages)
+                    .addComponent(lbl_selectedLanguages))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
-        tpnl_mainTabbedPanel.addTab("Language", pnl_lang);
+        tpnl_mainTabbedPanel.addTab("Language", pnl_languages);
 
-        sp_res.setViewportView(lst_res);
+        sp_resources.setViewportView(lst_resources);
 
         btn_addResource.setBackground(new java.awt.Color(51, 255, 0));
         btn_addResource.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
@@ -592,7 +592,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        lbl_res.setText("Resources : ");
+        lbl_pnlResourcesDescription.setText("Resources : ");
 
         javax.swing.GroupLayout pnl_resourcesLayout = new javax.swing.GroupLayout(pnl_resources);
         pnl_resources.setLayout(pnl_resourcesLayout);
@@ -601,7 +601,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(pnl_resourcesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnl_resourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(sp_res, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
+                    .addComponent(sp_resources, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE)
                     .addGroup(pnl_resourcesLayout.createSequentialGroup()
                         .addGroup(pnl_resourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(pnl_resourcesLayout.createSequentialGroup()
@@ -610,7 +610,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(btn_editResource, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_delResource, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbl_res))
+                            .addComponent(lbl_pnlResourcesDescription))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -618,9 +618,9 @@ public class MainFrame extends javax.swing.JFrame {
             pnl_resourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_resourcesLayout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addComponent(lbl_res)
+                .addComponent(lbl_pnlResourcesDescription)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sp_res, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sp_resources, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(pnl_resourcesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_addResource, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -663,7 +663,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        lbl_jars.setText("Jars : ");
+        lbl_pnlJarsDescription.setText("Jars : ");
 
         javax.swing.GroupLayout pnl_jarsLayout = new javax.swing.GroupLayout(pnl_jars);
         pnl_jars.setLayout(pnl_jarsLayout);
@@ -681,7 +681,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(btn_editJar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_delJar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lbl_jars))
+                            .addComponent(lbl_pnlJarsDescription))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -689,7 +689,7 @@ public class MainFrame extends javax.swing.JFrame {
             pnl_jarsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_jarsLayout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addComponent(lbl_jars)
+                .addComponent(lbl_pnlJarsDescription)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sp_jars, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
@@ -702,25 +702,29 @@ public class MainFrame extends javax.swing.JFrame {
 
         tpnl_mainTabbedPanel.addTab("Jars", pnl_jars);
 
-        lbl_panels.setText("Panels : ");
+        lbl_pnlPanelsDescription.setText("Panels : ");
 
-        btn_right.setText(">>");
-        btn_right.addActionListener(new java.awt.event.ActionListener() {
+        btn_selectPanel.setText(">>");
+        btn_selectPanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_addPanel_pressed(evt);
             }
         });
 
-        btn_left.setText("<<");
-        btn_left.addActionListener(new java.awt.event.ActionListener() {
+        btn_deselectPanel.setText("<<");
+        btn_deselectPanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_removePanel(evt);
             }
         });
 
-        sp_used.setEnabled(false);
+        sp_selectedPanels.setEnabled(false);
 
-        sp_used.setViewportView(lst_used);
+        sp_selectedPanels.setViewportView(lst_selectedPanels);
+
+        sp_avilablePanels.setEnabled(false);
+
+        sp_avilablePanels.setViewportView(lst_avilablePanels);
 
         btn_addPanel.setBackground(new java.awt.Color(51, 255, 0));
         btn_addPanel.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
@@ -737,17 +741,13 @@ public class MainFrame extends javax.swing.JFrame {
         btn_delPanel.setMinimumSize(new java.awt.Dimension(39, 19));
         btn_delPanel.setPreferredSize(new java.awt.Dimension(39, 19));
 
-        lbl_avilable.setText("Avilable Panels");
+        lbl_avilablePanels.setText("Avilable Panels");
 
-        lbl_used.setText("Used In Project");
+        lbl_selectedPanels.setText("Used In Project");
 
-        jButton1.setText("↓");
+        btn_setUpper.setText("↓");
 
-        jButton2.setText("↑");
-
-        sp_aPanels.setEnabled(false);
-
-        sp_aPanels.setViewportView(lst_aPanels);
+        btn_setLower.setText("↑");
 
         javax.swing.GroupLayout pnl_panelsLayout = new javax.swing.GroupLayout(pnl_panels);
         pnl_panels.setLayout(pnl_panelsLayout);
@@ -757,7 +757,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(pnl_panelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_panelsLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lbl_panels))
+                        .addComponent(lbl_pnlPanelsDescription))
                     .addGroup(pnl_panelsLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
                         .addGroup(pnl_panelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -770,49 +770,49 @@ public class MainFrame extends javax.swing.JFrame {
                             .addGroup(pnl_panelsLayout.createSequentialGroup()
                                 .addGroup(pnl_panelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(pnl_panelsLayout.createSequentialGroup()
-                                        .addComponent(sp_aPanels, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(sp_avilablePanels, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(pnl_panelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(btn_right, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btn_left, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(lbl_avilable))
+                                            .addComponent(btn_selectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btn_deselectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(lbl_avilablePanels))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(pnl_panelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_used)
+                                    .addComponent(lbl_selectedPanels)
                                     .addGroup(pnl_panelsLayout.createSequentialGroup()
-                                        .addComponent(sp_used, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(sp_selectedPanels, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(pnl_panelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
+                                            .addComponent(btn_setUpper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btn_setLower, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         pnl_panelsLayout.setVerticalGroup(
             pnl_panelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_panelsLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbl_panels)
+                .addComponent(lbl_pnlPanelsDescription)
                 .addGroup(pnl_panelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_panelsLayout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addComponent(btn_right)
+                        .addComponent(btn_selectPanel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_left))
+                        .addComponent(btn_deselectPanel))
                     .addGroup(pnl_panelsLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sp_used, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(sp_selectedPanels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_panelsLayout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addComponent(jButton2)
+                        .addComponent(btn_setLower)
                         .addGap(2, 2, 2)
-                        .addComponent(jButton1))
+                        .addComponent(btn_setUpper))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_panelsLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(sp_aPanels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(sp_avilablePanels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_panelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_avilable)
-                    .addComponent(lbl_used))
+                    .addComponent(lbl_avilablePanels)
+                    .addComponent(lbl_selectedPanels))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_panelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_addPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1122,29 +1122,29 @@ public class MainFrame extends javax.swing.JFrame {
         installation.getGuiPrefs().addModifier(useLabelIcons);
     }//GEN-LAST:event_cb_useLabelIcons_statechanged
 
-    private void btn_addLang_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addLang_pressed
-        List<LangPack> languages = lst_langs.getSelectedValuesList();
+    private void btn_selectLang_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selectLang_pressed
+        List<LangPack> languages = lst_avilableLanguages.getSelectedValuesList();
         if (languages.isEmpty()) {
             return;
         }
         for (LangPack itr : languages) {
             installation.getLocale().addLangPack(itr);
-            ((DefaultListModel<LangPack>)(lst_selectedLangs.getModel())).addElement(itr);
-            ((DefaultListModel<LangPack>)(lst_langs.getModel())).removeElement(itr);
+            ((DefaultListModel<LangPack>)(lst_selectedLanguages.getModel())).addElement(itr);
+            ((DefaultListModel<LangPack>)(lst_avilableLanguages.getModel())).removeElement(itr);
         }
-    }//GEN-LAST:event_btn_addLang_pressed
+    }//GEN-LAST:event_btn_selectLang_pressed
 
-    private void btn_removeLang_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removeLang_pressed
-        List<LangPack> languages = lst_selectedLangs.getSelectedValuesList();
+    private void btn_deselectLang_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deselectLang_pressed
+        List<LangPack> languages = lst_selectedLanguages.getSelectedValuesList();
         if (languages.isEmpty()) {
             return;
         }
         for (LangPack itr : languages) {
             installation.getLocale().removeLangPack(itr);
-            ((DefaultListModel<LangPack>)(lst_langs.getModel())).addElement(itr);
-            ((DefaultListModel<LangPack>)(lst_selectedLangs.getModel())).removeElement(itr);
+            ((DefaultListModel<LangPack>)(lst_avilableLanguages.getModel())).addElement(itr);
+            ((DefaultListModel<LangPack>)(lst_selectedLanguages.getModel())).removeElement(itr);
         }
-    }//GEN-LAST:event_btn_removeLang_pressed
+    }//GEN-LAST:event_btn_deselectLang_pressed
 
     private void btn_addResource_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addResource_pressed
         ResourceDialog dlg = new ResourceDialog(this, null);
@@ -1154,7 +1154,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_addResource_pressed
 
     private void btn_editResource_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editResource_pressed
-        List<Resource> selected = lst_res.getSelectedValuesList();
+        List<Resource> selected = lst_resources.getSelectedValuesList();
         if (selected.isEmpty()) {
             return;
         }
@@ -1170,13 +1170,13 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editResource_pressed
 
     private void btn_delResource_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_delResource_pressed
-        List<Resource> selected = lst_res.getSelectedValuesList();
+        List<Resource> selected = lst_resources.getSelectedValuesList();
         if (selected.isEmpty()) {
             return;
         }
         for (Resource itr : selected) {
             installation.getResources().removeResource(itr);
-            ((DefaultListModel<Resource>)lst_res.getModel()).removeElement(itr);
+            ((DefaultListModel<Resource>)lst_resources.getModel()).removeElement(itr);
         }
     }//GEN-LAST:event_btn_delResource_pressed
 
@@ -1308,26 +1308,26 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_delPackorFile_pressed
 
     private void btn_addPanel_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addPanel_pressed
-        List<Panel> panels = lst_aPanels.getSelectedValuesList();
+        List<Panel> panels = lst_avilablePanels.getSelectedValuesList();
         if (panels.isEmpty()) {
             return;
         }
         for (Panel itr : panels) {
             installation.getPanels().addPanel(itr);
-            ((DefaultListModel<Panel>)(lst_used.getModel())).addElement(itr);
-            ((DefaultListModel<Panel>)(lst_aPanels.getModel())).removeElement(itr);
+            ((DefaultListModel<Panel>)(lst_selectedPanels.getModel())).addElement(itr);
+            ((DefaultListModel<Panel>)(lst_avilablePanels.getModel())).removeElement(itr);
         }
     }//GEN-LAST:event_btn_addPanel_pressed
 
     private void btn_removePanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removePanel
-        List<Panel> panels = lst_used.getSelectedValuesList();
+        List<Panel> panels = lst_selectedPanels.getSelectedValuesList();
         if (panels.isEmpty()) {
             return;
         }
         for (Panel itr : panels) {
             installation.getPanels().removePanel(itr);
-            ((DefaultListModel<Panel>)(lst_aPanels.getModel())).addElement(itr);
-            ((DefaultListModel<Panel>)(lst_used.getModel())).removeElement(itr);
+            ((DefaultListModel<Panel>)(lst_avilablePanels.getModel())).addElement(itr);
+            ((DefaultListModel<Panel>)(lst_selectedPanels.getModel())).removeElement(itr);
         }
     }//GEN-LAST:event_btn_removePanel
 
@@ -1365,7 +1365,6 @@ public class MainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_addAuthor;
     private javax.swing.JButton btn_addJar;
-    private javax.swing.JButton btn_addLang;
     private javax.swing.JButton btn_addPackorFile;
     private javax.swing.JButton btn_addPanel;
     private javax.swing.JButton btn_addResource;
@@ -1374,66 +1373,67 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_delPackorFile;
     private javax.swing.JButton btn_delPanel;
     private javax.swing.JButton btn_delResource;
+    private javax.swing.JButton btn_deselectLang;
+    private javax.swing.JButton btn_deselectPanel;
     private javax.swing.JButton btn_editAuthor;
     private javax.swing.JButton btn_editJar;
     private javax.swing.JButton btn_editPackorFile;
     private javax.swing.JButton btn_editPanel;
     private javax.swing.JButton btn_editResource;
     private javax.swing.JButton btn_gen;
-    private javax.swing.JButton btn_left;
     private javax.swing.JButton btn_lock;
     private javax.swing.JButton btn_out;
-    private javax.swing.JButton btn_removeLang;
-    private javax.swing.JButton btn_right;
+    private javax.swing.JButton btn_selectLang;
+    private javax.swing.JButton btn_selectPanel;
+    private javax.swing.JButton btn_setLower;
+    private javax.swing.JButton btn_setUpper;
     private javax.swing.JComboBox cb_authors;
     private javax.swing.JComboBox cb_rebootOption;
     private javax.swing.JCheckBox cb_resizable;
     private javax.swing.JCheckBox cb_runPrivilaged;
     private javax.swing.JCheckBox cb_useButtonIcons;
     private javax.swing.JCheckBox cb_useLabelIcons;
-    private javax.swing.JPanel cmb_reboot;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel lbl_applicationName;
     private javax.swing.JLabel lbl_authors;
-    private javax.swing.JLabel lbl_avilable;
+    private javax.swing.JLabel lbl_avilableLanguages;
+    private javax.swing.JLabel lbl_avilablePanels;
     private javax.swing.JLabel lbl_gen;
-    private javax.swing.JLabel lbl_jars;
     private javax.swing.JLabel lbl_labelGap;
-    private javax.swing.JLabel lbl_lang;
-    private javax.swing.JLabel lbl_langs;
     private javax.swing.JLabel lbl_lock;
     private javax.swing.JLabel lbl_out;
     private javax.swing.JLabel lbl_packs;
-    private javax.swing.JLabel lbl_panels;
+    private javax.swing.JLabel lbl_pnlJarsDescription;
+    private javax.swing.JLabel lbl_pnlLanguagesDescription;
+    private javax.swing.JLabel lbl_pnlPanelsDescription;
+    private javax.swing.JLabel lbl_pnlResourcesDescription;
     private javax.swing.JLabel lbl_rebootOption;
-    private javax.swing.JLabel lbl_res;
-    private javax.swing.JLabel lbl_selectedLangs;
+    private javax.swing.JLabel lbl_selectedLanguages;
+    private javax.swing.JLabel lbl_selectedPanels;
     private javax.swing.JLabel lbl_size;
     private javax.swing.JLabel lbl_url;
-    private javax.swing.JLabel lbl_used;
     private javax.swing.JLabel lbl_version;
     private javax.swing.JLabel lbl_x;
-    private javax.swing.JList lst_aPanels;
+    private javax.swing.JList lst_avilableLanguages;
+    private javax.swing.JList lst_avilablePanels;
     private javax.swing.JList lst_jars;
-    private javax.swing.JList lst_langs;
-    private javax.swing.JList lst_res;
-    private javax.swing.JList lst_selectedLangs;
-    private javax.swing.JList lst_used;
+    private javax.swing.JList lst_resources;
+    private javax.swing.JList lst_selectedLanguages;
+    private javax.swing.JList lst_selectedPanels;
     private javax.swing.JPanel pnl_gen;
     private javax.swing.JPanel pnl_gui;
+    private javax.swing.JPanel pnl_information;
     private javax.swing.JPanel pnl_jars;
-    private javax.swing.JPanel pnl_lang;
+    private javax.swing.JPanel pnl_languages;
     private javax.swing.JPanel pnl_packs;
     private javax.swing.JPanel pnl_panels;
     private javax.swing.JPanel pnl_resources;
-    private javax.swing.JScrollPane sp_aPanels;
+    private javax.swing.JScrollPane sp_avilableLanguages;
+    private javax.swing.JScrollPane sp_avilablePanels;
     private javax.swing.JScrollPane sp_jars;
-    private javax.swing.JScrollPane sp_langs;
     private javax.swing.JScrollPane sp_packs;
-    private javax.swing.JScrollPane sp_res;
-    private javax.swing.JScrollPane sp_selectedLangs;
-    private javax.swing.JScrollPane sp_used;
+    private javax.swing.JScrollPane sp_resources;
+    private javax.swing.JScrollPane sp_selectedLanguages;
+    private javax.swing.JScrollPane sp_selectedPanels;
     private javax.swing.JTextField tf_applicationName;
     private javax.swing.JTextField tf_height;
     private javax.swing.JTextField tf_labelGap;
