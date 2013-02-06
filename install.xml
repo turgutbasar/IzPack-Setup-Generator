@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<installation version="1.0">
+    <info>
+        <authors/>
+        <run-privilaged>no</run-privilaged>
+    </info>
+    <guiprefs width="0" height="0" resizable="no"/>
+    <locale/>
+    <resources/>
+    <panels>
+        <panel/>
+    </panels>
+    <packs/>
+</installation>

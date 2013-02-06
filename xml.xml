@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<installation version="1.0">
+    <info>
+        <authors/>
+        <rebootAfter>false</rebootAfter>
+        <run-privilaged>false</run-privilaged>
+    </info>
+    <guiprefs width="0" height="0" resizable="false"/>
+    <locale/>
+    <resources/>
+    <panels>
+        <panel/>
+    </panels>
+    <packs/>
+</installation>

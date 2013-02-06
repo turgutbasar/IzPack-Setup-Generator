@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<installation version="1.0">
+    <info>
+        <appname>Test</appname>
+        <version>Beta</version>
+        <authors>
+            <author email="destek@kade.com.tr" name="Kade"/>
+        </authors>
+        <url>www.kade.com.tr</url>
+        <rebootAfter>false</rebootAfter>
+        <run-privilaged>false</run-privilaged>
+    </info>
+    <guiprefs width="320" height="240" resizable="false">
+        <modifier key="labelGap" value="2"/>
+        <modifier key="useButtonIcons" value="false"/>
+        <modifier key="useLabelIcons" value="false"/>
+    </guiprefs>
+    <locale>
+        <langpack iso3="eng"/>
+    </locale>
+    <resources>
+        <res id="ID" src="SRC"/>
+    </resources>
+    <jar src="SRC" stage="install"/>
+    <panels>
+        <panel classname="TargetPanel"/>
+        <panel classname="PacksPanel"/>
+        <panel classname="ProcessPanel"/>
+        <panel classname="InstallPanel"/>
+    </panels>
+    <packs>
+        <pack name="Pack" required="true">
+            <description>Description</description>
+            <file source="Source" targetdir="Target Dir"/>
+        </pack>
+    </packs>
+</installation>
