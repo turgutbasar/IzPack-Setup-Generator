@@ -3,6 +3,7 @@
 <Form version="1.7" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="title" type="java.lang.String" value="IzPack Setup Creator"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -24,7 +25,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" max="32767" attributes="0"/>
+              <Component id="tpnl_mainTabbedPanel" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -33,14 +34,14 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTabbedPane1" max="32767" attributes="0"/>
+              <Component id="tpnl_mainTabbedPanel" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JTabbedPane" name="jTabbedPane1">
+    <Container class="javax.swing.JTabbedPane" name="tpnl_mainTabbedPanel">
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="info"/>
       </AccessibilityProperties>
@@ -65,25 +66,25 @@
                           <Component id="cb_runPrivilaged" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lbl_appName" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_applicationName" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbl_version" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbl_authors" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbl_url" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lbl_reboot" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_rebootOption" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="cb_reboot" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cb_rebootOption" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="tf_appName" pref="107" max="32767" attributes="0"/>
+                                          <Component id="tf_applicationName" pref="107" max="32767" attributes="0"/>
                                           <Component id="tf_version" max="32767" attributes="0"/>
                                           <Component id="cb_authors" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btn_addAuthor" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btn_editPackorFile1" min="-2" pref="39" max="-2" attributes="0"/>
+                                      <Component id="btn_editAuthor" min="-2" pref="39" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="btn_delAuthor" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -100,8 +101,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lbl_appName" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tf_appName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_applicationName" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="tf_applicationName" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -124,35 +125,35 @@
                           <Group type="102" alignment="1" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="btn_addAuthor" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
-                                  <Component id="btn_editPackorFile1" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                                  <Component id="btn_editAuthor" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                                   <Component id="btn_delAuthor" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="cb_reboot" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbl_reboot" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cb_rebootOption" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lbl_rebootOption" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="cb_runPrivilaged" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="72" max="32767" attributes="0"/>
+                      <EmptySpace pref="83" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="lbl_appName">
+            <Component class="javax.swing.JLabel" name="lbl_applicationName">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Application Name : "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tf_appName">
+            <Component class="javax.swing.JTextField" name="tf_applicationName">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Default Application"/>
               </Properties>
               <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tf_appName_lostfocus"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tf_applicationName_lostfocus"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_version">
@@ -238,7 +239,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btn_editPackorFile1">
+            <Component class="javax.swing.JButton" name="btn_editAuthor">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="ff" red="ff" type="rgb"/>
@@ -252,7 +253,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_editAuthor_pressed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JComboBox" name="cb_reboot">
+            <Component class="javax.swing.JComboBox" name="cb_rebootOption">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
@@ -267,7 +268,7 @@
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="cmb_reboot_statechanged"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="lbl_reboot">
+            <Component class="javax.swing.JLabel" name="lbl_rebootOption">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reboot Option : "/>
               </Properties>

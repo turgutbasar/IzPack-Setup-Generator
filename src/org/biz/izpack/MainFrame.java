@@ -163,10 +163,10 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tpnl_mainTabbedPanel = new javax.swing.JTabbedPane();
         cmb_reboot = new javax.swing.JPanel();
-        lbl_appName = new javax.swing.JLabel();
-        tf_appName = new javax.swing.JTextField();
+        lbl_applicationName = new javax.swing.JLabel();
+        tf_applicationName = new javax.swing.JTextField();
         lbl_version = new javax.swing.JLabel();
         tf_version = new javax.swing.JTextField();
         lbl_authors = new javax.swing.JLabel();
@@ -176,9 +176,9 @@ public class MainFrame extends javax.swing.JFrame {
         tf_url = new javax.swing.JTextField();
         cb_runPrivilaged = new javax.swing.JCheckBox();
         cb_authors = new javax.swing.JComboBox();
-        btn_editPackorFile1 = new javax.swing.JButton();
-        cb_reboot = new javax.swing.JComboBox();
-        lbl_reboot = new javax.swing.JLabel();
+        btn_editAuthor = new javax.swing.JButton();
+        cb_rebootOption = new javax.swing.JComboBox();
+        lbl_rebootOption = new javax.swing.JLabel();
         pnl_gui = new javax.swing.JPanel();
         lbl_size = new javax.swing.JLabel();
         tf_width = new javax.swing.JTextField();
@@ -244,13 +244,14 @@ public class MainFrame extends javax.swing.JFrame {
         btn_lock = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("IzPack Setup Creator");
 
-        lbl_appName.setText("Application Name : ");
+        lbl_applicationName.setText("Application Name : ");
 
-        tf_appName.setText("Default Application");
-        tf_appName.addFocusListener(new java.awt.event.FocusAdapter() {
+        tf_applicationName.setText("Default Application");
+        tf_applicationName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                tf_appName_lostfocus(evt);
+                tf_applicationName_lostfocus(evt);
             }
         });
 
@@ -302,23 +303,23 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        btn_editPackorFile1.setBackground(new java.awt.Color(255, 255, 0));
-        btn_editPackorFile1.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
-        btn_editPackorFile1.setText("E");
-        btn_editPackorFile1.addActionListener(new java.awt.event.ActionListener() {
+        btn_editAuthor.setBackground(new java.awt.Color(255, 255, 0));
+        btn_editAuthor.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        btn_editAuthor.setText("E");
+        btn_editAuthor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_editAuthor_pressed(evt);
             }
         });
 
-        cb_reboot.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ignore", "notice", "ask", "always" }));
-        cb_reboot.addItemListener(new java.awt.event.ItemListener() {
+        cb_rebootOption.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ignore", "notice", "ask", "always" }));
+        cb_rebootOption.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmb_reboot_statechanged(evt);
             }
         });
 
-        lbl_reboot.setText("Reboot Option : ");
+        lbl_rebootOption.setText("Reboot Option : ");
 
         javax.swing.GroupLayout cmb_rebootLayout = new javax.swing.GroupLayout(cmb_reboot);
         cmb_reboot.setLayout(cmb_rebootLayout);
@@ -330,23 +331,23 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(cb_runPrivilaged)
                     .addGroup(cmb_rebootLayout.createSequentialGroup()
                         .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_appName)
+                            .addComponent(lbl_applicationName)
                             .addComponent(lbl_version)
                             .addComponent(lbl_authors)
                             .addComponent(lbl_url)
-                            .addComponent(lbl_reboot))
+                            .addComponent(lbl_rebootOption))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cb_reboot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cb_rebootOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(cmb_rebootLayout.createSequentialGroup()
                                 .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tf_appName, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                                    .addComponent(tf_applicationName, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                                     .addComponent(tf_version)
                                     .addComponent(cb_authors, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_addAuthor)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btn_editPackorFile1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_editAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_delAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(tf_url, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -357,8 +358,8 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(cmb_rebootLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_appName)
-                    .addComponent(tf_appName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_applicationName)
+                    .addComponent(tf_applicationName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_version)
@@ -376,18 +377,18 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, cmb_rebootLayout.createSequentialGroup()
                         .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_addAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_editPackorFile1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_editAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_delAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)))
                 .addGroup(cmb_rebootLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_reboot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_reboot))
+                    .addComponent(cb_rebootOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_rebootOption))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cb_runPrivilaged)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Information", cmb_reboot);
+        tpnl_mainTabbedPanel.addTab("Information", cmb_reboot);
 
         lbl_size.setText("Size : ");
 
@@ -485,7 +486,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(128, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("GUI Settings", pnl_gui);
+        tpnl_mainTabbedPanel.addTab("GUI Settings", pnl_gui);
 
         lbl_lang.setText("Language : ");
 
@@ -557,7 +558,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Language", pnl_lang);
+        tpnl_mainTabbedPanel.addTab("Language", pnl_lang);
 
         sp_res.setViewportView(lst_res);
 
@@ -628,7 +629,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Resources", pnl_resources);
+        tpnl_mainTabbedPanel.addTab("Resources", pnl_resources);
 
         sp_jars.setViewportView(lst_jars);
 
@@ -699,7 +700,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Jars", pnl_jars);
+        tpnl_mainTabbedPanel.addTab("Jars", pnl_jars);
 
         lbl_panels.setText("Panels : ");
 
@@ -820,7 +821,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Panels", pnl_panels);
+        tpnl_mainTabbedPanel.addTab("Panels", pnl_panels);
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("packs");
         tree_packs.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
@@ -894,7 +895,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Packs", pnl_packs);
+        tpnl_mainTabbedPanel.addTab("Packs", pnl_packs);
 
         lbl_lock.setText("Lock Settings : ");
 
@@ -964,7 +965,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(151, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Generate", pnl_gen);
+        tpnl_mainTabbedPanel.addTab("Generate", pnl_gen);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -972,18 +973,18 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(tpnl_mainTabbedPanel)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(tpnl_mainTabbedPanel)
                 .addContainerGap())
         );
 
-        jTabbedPane1.getAccessibleContext().setAccessibleName("info");
+        tpnl_mainTabbedPanel.getAccessibleContext().setAccessibleName("info");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1015,11 +1016,11 @@ public class MainFrame extends javax.swing.JFrame {
 	}
     }//GEN-LAST:event_btn_generate_pressed
 
-    private void tf_appName_lostfocus(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_appName_lostfocus
-        if (!tf_appName.getText().isEmpty()) {
-            installation.getInfo().setAppName(tf_appName.getText());
+    private void tf_applicationName_lostfocus(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_applicationName_lostfocus
+        if (!tf_applicationName.getText().isEmpty()) {
+            installation.getInfo().setAppName(tf_applicationName.getText());
         }
-    }//GEN-LAST:event_tf_appName_lostfocus
+    }//GEN-LAST:event_tf_applicationName_lostfocus
 
     private void tf_version_lostfocus(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_version_lostfocus
         if (!tf_version.getText().isEmpty()) {
@@ -1260,7 +1261,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editPackorFile_pressed
 
     private void cmb_reboot_statechanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_reboot_statechanged
-        installation.getInfo().setRebootAction(cb_reboot.getSelectedItem().toString());                
+        installation.getInfo().setRebootAction(cb_rebootOption.getSelectedItem().toString());                
     }//GEN-LAST:event_cmb_reboot_statechanged
 
     private void btn_out_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_out_pressed
@@ -1373,9 +1374,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_delPackorFile;
     private javax.swing.JButton btn_delPanel;
     private javax.swing.JButton btn_delResource;
+    private javax.swing.JButton btn_editAuthor;
     private javax.swing.JButton btn_editJar;
     private javax.swing.JButton btn_editPackorFile;
-    private javax.swing.JButton btn_editPackorFile1;
     private javax.swing.JButton btn_editPanel;
     private javax.swing.JButton btn_editResource;
     private javax.swing.JButton btn_gen;
@@ -1385,7 +1386,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_removeLang;
     private javax.swing.JButton btn_right;
     private javax.swing.JComboBox cb_authors;
-    private javax.swing.JComboBox cb_reboot;
+    private javax.swing.JComboBox cb_rebootOption;
     private javax.swing.JCheckBox cb_resizable;
     private javax.swing.JCheckBox cb_runPrivilaged;
     private javax.swing.JCheckBox cb_useButtonIcons;
@@ -1393,8 +1394,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel cmb_reboot;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel lbl_appName;
+    private javax.swing.JLabel lbl_applicationName;
     private javax.swing.JLabel lbl_authors;
     private javax.swing.JLabel lbl_avilable;
     private javax.swing.JLabel lbl_gen;
@@ -1406,7 +1406,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_out;
     private javax.swing.JLabel lbl_packs;
     private javax.swing.JLabel lbl_panels;
-    private javax.swing.JLabel lbl_reboot;
+    private javax.swing.JLabel lbl_rebootOption;
     private javax.swing.JLabel lbl_res;
     private javax.swing.JLabel lbl_selectedLangs;
     private javax.swing.JLabel lbl_size;
@@ -1434,12 +1434,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane sp_res;
     private javax.swing.JScrollPane sp_selectedLangs;
     private javax.swing.JScrollPane sp_used;
-    private javax.swing.JTextField tf_appName;
+    private javax.swing.JTextField tf_applicationName;
     private javax.swing.JTextField tf_height;
     private javax.swing.JTextField tf_labelGap;
     private javax.swing.JTextField tf_url;
     private javax.swing.JTextField tf_version;
     private javax.swing.JTextField tf_width;
+    private javax.swing.JTabbedPane tpnl_mainTabbedPanel;
     private javax.swing.JTree tree_packs;
     // End of variables declaration//GEN-END:variables
 }
