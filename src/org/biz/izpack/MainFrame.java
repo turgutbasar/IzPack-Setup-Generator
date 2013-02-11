@@ -75,13 +75,13 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private void populateCBAuthors() {
-        cb_authors.removeAllItems();
+        cmb_authors.removeAllItems();
         Author[] authors = installation.getInfo().getAuthors();
         if (authors.length == 0) {
             return;
         }
         for (Author itr : authors) {
-            cb_authors.addItem(itr);
+            cmb_authors.addItem(itr);
         }
     }
     
@@ -170,19 +170,19 @@ public class MainFrame extends javax.swing.JFrame {
         lbl_version = new javax.swing.JLabel();
         tf_version = new javax.swing.JTextField();
         lbl_authors = new javax.swing.JLabel();
+        cmb_authors = new javax.swing.JComboBox();
         btn_addAuthor = new javax.swing.JButton();
+        btn_editAuthor = new javax.swing.JButton();
         btn_delAuthor = new javax.swing.JButton();
         lbl_url = new javax.swing.JLabel();
         tf_url = new javax.swing.JTextField();
-        cb_runPrivilaged = new javax.swing.JCheckBox();
-        cb_authors = new javax.swing.JComboBox();
-        btn_editAuthor = new javax.swing.JButton();
-        cb_rebootOption = new javax.swing.JComboBox();
         lbl_rebootOption = new javax.swing.JLabel();
+        cmb_rebootOption = new javax.swing.JComboBox();
+        cb_runPrivilaged = new javax.swing.JCheckBox();
         pnl_gui = new javax.swing.JPanel();
         lbl_size = new javax.swing.JLabel();
-        lbl_x = new javax.swing.JLabel();
         tf_width = new javax.swing.JTextField();
+        lbl_x = new javax.swing.JLabel();
         tf_height = new javax.swing.JTextField();
         lbl_labelGap = new javax.swing.JLabel();
         tf_labelGap = new javax.swing.JTextField();
@@ -193,55 +193,55 @@ public class MainFrame extends javax.swing.JFrame {
         lbl_pnlLanguagesDescription = new javax.swing.JLabel();
         sp_avilableLanguages = new javax.swing.JScrollPane();
         lst_avilableLanguages = new javax.swing.JList();
-        sp_selectedLanguages = new javax.swing.JScrollPane();
-        lst_selectedLanguages = new javax.swing.JList();
-        lbl_selectedLanguages = new javax.swing.JLabel();
         lbl_avilableLanguages = new javax.swing.JLabel();
         btn_selectLang = new javax.swing.JButton();
         btn_deselectLang = new javax.swing.JButton();
+        sp_selectedLanguages = new javax.swing.JScrollPane();
+        lst_selectedLanguages = new javax.swing.JList();
+        lbl_selectedLanguages = new javax.swing.JLabel();
         pnl_resources = new javax.swing.JPanel();
+        lbl_pnlResourcesDescription = new javax.swing.JLabel();
         sp_resources = new javax.swing.JScrollPane();
         lst_resources = new javax.swing.JList();
         btn_addResource = new javax.swing.JButton();
-        btn_delResource = new javax.swing.JButton();
         btn_editResource = new javax.swing.JButton();
-        lbl_pnlResourcesDescription = new javax.swing.JLabel();
+        btn_delResource = new javax.swing.JButton();
         pnl_jars = new javax.swing.JPanel();
+        lbl_pnlJarsDescription = new javax.swing.JLabel();
         sp_jars = new javax.swing.JScrollPane();
         lst_jars = new javax.swing.JList();
         btn_addJar = new javax.swing.JButton();
         btn_editJar = new javax.swing.JButton();
         btn_delJar = new javax.swing.JButton();
-        lbl_pnlJarsDescription = new javax.swing.JLabel();
         pnl_panels = new javax.swing.JPanel();
         lbl_pnlPanelsDescription = new javax.swing.JLabel();
+        sp_avilablePanels = new javax.swing.JScrollPane();
+        lst_avilablePanels = new javax.swing.JList();
+        lbl_avilablePanels = new javax.swing.JLabel();
         btn_selectPanel = new javax.swing.JButton();
         btn_deselectPanel = new javax.swing.JButton();
         sp_selectedPanels = new javax.swing.JScrollPane();
         lst_selectedPanels = new javax.swing.JList();
-        sp_avilablePanels = new javax.swing.JScrollPane();
-        lst_avilablePanels = new javax.swing.JList();
-        btn_addPanel = new javax.swing.JButton();
-        btn_editPanel = new javax.swing.JButton();
-        btn_delPanel = new javax.swing.JButton();
-        lbl_avilablePanels = new javax.swing.JLabel();
         lbl_selectedPanels = new javax.swing.JLabel();
         btn_setUpper = new javax.swing.JButton();
         btn_setLower = new javax.swing.JButton();
+        btn_addPanel = new javax.swing.JButton();
+        btn_editPanel = new javax.swing.JButton();
+        btn_delPanel = new javax.swing.JButton();
         pnl_packs = new javax.swing.JPanel();
+        lbl_packs = new javax.swing.JLabel();
         sp_packs = new javax.swing.JScrollPane();
         tree_packs = new javax.swing.JTree();
-        lbl_packs = new javax.swing.JLabel();
         btn_addPackorFile = new javax.swing.JButton();
         btn_editPackorFile = new javax.swing.JButton();
         btn_delPackorFile = new javax.swing.JButton();
         pnl_gen = new javax.swing.JPanel();
-        lbl_lock = new javax.swing.JLabel();
-        lbl_gen = new javax.swing.JLabel();
-        btn_gen = new javax.swing.JButton();
         lbl_out = new javax.swing.JLabel();
         btn_out = new javax.swing.JButton();
+        lbl_lock = new javax.swing.JLabel();
         btn_lock = new javax.swing.JButton();
+        lbl_gen = new javax.swing.JLabel();
+        btn_gen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("IzPack Setup Creator");
@@ -275,6 +275,15 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        btn_editAuthor.setBackground(new java.awt.Color(255, 255, 0));
+        btn_editAuthor.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        btn_editAuthor.setText("E");
+        btn_editAuthor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editAuthor_pressed(evt);
+            }
+        });
+
         btn_delAuthor.setBackground(new java.awt.Color(255, 0, 0));
         btn_delAuthor.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
         btn_delAuthor.setText("X");
@@ -296,30 +305,21 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        lbl_rebootOption.setText("Reboot Option : ");
+
+        cmb_rebootOption.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ignore", "notice", "ask", "always" }));
+        cmb_rebootOption.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmb_reboot_statechanged(evt);
+            }
+        });
+
         cb_runPrivilaged.setText("Run Privilaged (Important for Vista)");
         cb_runPrivilaged.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cb_runPrivilaged_statechanged(evt);
             }
         });
-
-        btn_editAuthor.setBackground(new java.awt.Color(255, 255, 0));
-        btn_editAuthor.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
-        btn_editAuthor.setText("E");
-        btn_editAuthor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_editAuthor_pressed(evt);
-            }
-        });
-
-        cb_rebootOption.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ignore", "notice", "ask", "always" }));
-        cb_rebootOption.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cmb_reboot_statechanged(evt);
-            }
-        });
-
-        lbl_rebootOption.setText("Reboot Option : ");
 
         javax.swing.GroupLayout pnl_informationLayout = new javax.swing.GroupLayout(pnl_information);
         pnl_information.setLayout(pnl_informationLayout);
@@ -338,12 +338,12 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(lbl_rebootOption))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cb_rebootOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmb_rebootOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(pnl_informationLayout.createSequentialGroup()
                                 .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tf_applicationName, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                                     .addComponent(tf_version)
-                                    .addComponent(cb_authors, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(cmb_authors, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btn_addAuthor)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -369,7 +369,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_informationLayout.createSequentialGroup()
                         .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_authors)
-                            .addComponent(cb_authors, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cmb_authors, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12)
                         .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbl_url)
@@ -381,7 +381,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(btn_delAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)))
                 .addGroup(pnl_informationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cb_rebootOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmb_rebootOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_rebootOption))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cb_runPrivilaged)
@@ -392,14 +392,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         lbl_size.setText("Size : ");
 
-        lbl_x.setText("X");
-
         tf_width.setText("320");
         tf_width.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tf_width_focuslost(evt);
             }
         });
+
+        lbl_x.setText("X");
 
         tf_height.setText("240");
         tf_height.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -492,10 +492,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         sp_avilableLanguages.setViewportView(lst_avilableLanguages);
 
-        sp_selectedLanguages.setViewportView(lst_selectedLanguages);
-
-        lbl_selectedLanguages.setText("Used in Project");
-
         lbl_avilableLanguages.setText("Languages");
 
         btn_selectLang.setText(">>");
@@ -511,6 +507,10 @@ public class MainFrame extends javax.swing.JFrame {
                 btn_deselectLang_pressed(evt);
             }
         });
+
+        sp_selectedLanguages.setViewportView(lst_selectedLanguages);
+
+        lbl_selectedLanguages.setText("Used in Project");
 
         javax.swing.GroupLayout pnl_languagesLayout = new javax.swing.GroupLayout(pnl_languages);
         pnl_languages.setLayout(pnl_languagesLayout);
@@ -560,6 +560,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         tpnl_mainTabbedPanel.addTab("Language", pnl_languages);
 
+        lbl_pnlResourcesDescription.setText("Resources : ");
+
         sp_resources.setViewportView(lst_resources);
 
         btn_addResource.setBackground(new java.awt.Color(51, 255, 0));
@@ -568,6 +570,15 @@ public class MainFrame extends javax.swing.JFrame {
         btn_addResource.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_addResource_pressed(evt);
+            }
+        });
+
+        btn_editResource.setBackground(new java.awt.Color(255, 255, 0));
+        btn_editResource.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
+        btn_editResource.setText("E");
+        btn_editResource.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editResource_pressed(evt);
             }
         });
 
@@ -582,17 +593,6 @@ public class MainFrame extends javax.swing.JFrame {
                 btn_delResource_pressed(evt);
             }
         });
-
-        btn_editResource.setBackground(new java.awt.Color(255, 255, 0));
-        btn_editResource.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
-        btn_editResource.setText("E");
-        btn_editResource.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_editResource_pressed(evt);
-            }
-        });
-
-        lbl_pnlResourcesDescription.setText("Resources : ");
 
         javax.swing.GroupLayout pnl_resourcesLayout = new javax.swing.GroupLayout(pnl_resources);
         pnl_resources.setLayout(pnl_resourcesLayout);
@@ -631,6 +631,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         tpnl_mainTabbedPanel.addTab("Resources", pnl_resources);
 
+        lbl_pnlJarsDescription.setText("Jars : ");
+
         sp_jars.setViewportView(lst_jars);
 
         btn_addJar.setBackground(new java.awt.Color(51, 255, 0));
@@ -662,8 +664,6 @@ public class MainFrame extends javax.swing.JFrame {
                 btn_delJar_pressed(evt);
             }
         });
-
-        lbl_pnlJarsDescription.setText("Jars : ");
 
         javax.swing.GroupLayout pnl_jarsLayout = new javax.swing.GroupLayout(pnl_jars);
         pnl_jars.setLayout(pnl_jarsLayout);
@@ -704,6 +704,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         lbl_pnlPanelsDescription.setText("Panels : ");
 
+        sp_avilablePanels.setEnabled(false);
+
+        sp_avilablePanels.setViewportView(lst_avilablePanels);
+
+        lbl_avilablePanels.setText("Avilable Panels");
+
         btn_selectPanel.setText(">>");
         btn_selectPanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -722,9 +728,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         sp_selectedPanels.setViewportView(lst_selectedPanels);
 
-        sp_avilablePanels.setEnabled(false);
+        lbl_selectedPanels.setText("Used In Project");
 
-        sp_avilablePanels.setViewportView(lst_avilablePanels);
+        btn_setUpper.setText("↓");
+
+        btn_setLower.setText("↑");
 
         btn_addPanel.setBackground(new java.awt.Color(51, 255, 0));
         btn_addPanel.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
@@ -740,14 +748,6 @@ public class MainFrame extends javax.swing.JFrame {
         btn_delPanel.setMaximumSize(new java.awt.Dimension(39, 19));
         btn_delPanel.setMinimumSize(new java.awt.Dimension(39, 19));
         btn_delPanel.setPreferredSize(new java.awt.Dimension(39, 19));
-
-        lbl_avilablePanels.setText("Avilable Panels");
-
-        lbl_selectedPanels.setText("Used In Project");
-
-        btn_setUpper.setText("↓");
-
-        btn_setLower.setText("↑");
 
         javax.swing.GroupLayout pnl_panelsLayout = new javax.swing.GroupLayout(pnl_panels);
         pnl_panels.setLayout(pnl_panelsLayout);
@@ -823,12 +823,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         tpnl_mainTabbedPanel.addTab("Panels", pnl_panels);
 
+        lbl_packs.setText("Packs : ");
+
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("packs");
         tree_packs.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         tree_packs.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         sp_packs.setViewportView(tree_packs);
-
-        lbl_packs.setText("Packs : ");
 
         btn_addPackorFile.setBackground(new java.awt.Color(51, 255, 0));
         btn_addPackorFile.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
@@ -897,19 +897,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         tpnl_mainTabbedPanel.addTab("Packs", pnl_packs);
 
-        lbl_lock.setText("Lock Settings : ");
-
-        lbl_gen.setText("Generate Project : ");
-
-        btn_gen.setBackground(new java.awt.Color(255, 255, 0));
-        btn_gen.setText("Generate");
-        btn_gen.setEnabled(false);
-        btn_gen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_generate_pressed(evt);
-            }
-        });
-
         lbl_out.setText("Output Location : ");
 
         btn_out.setText("Browse");
@@ -919,10 +906,23 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        lbl_lock.setText("Lock Settings : ");
+
         btn_lock.setText("Lock");
         btn_lock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_lock_pressed(evt);
+            }
+        });
+
+        lbl_gen.setText("Generate Project : ");
+
+        btn_gen.setBackground(new java.awt.Color(255, 255, 0));
+        btn_gen.setText("Generate");
+        btn_gen.setEnabled(false);
+        btn_gen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_generate_pressed(evt);
             }
         });
 
@@ -1036,7 +1036,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_addAuthor_pressed
 
     private void btn_delAuthor_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_delAuthor_pressed
-        Author selected = (Author)cb_authors.getSelectedItem();
+        Author selected = (Author)cmb_authors.getSelectedItem();
         if (selected == null) {
             return;
         }
@@ -1045,7 +1045,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_delAuthor_pressed
 
     private void btn_editAuthor_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editAuthor_pressed
-        Author selected = (Author)cb_authors.getSelectedItem();
+        Author selected = (Author)cmb_authors.getSelectedItem();
         if (selected == null) {
             return;
         }
@@ -1261,7 +1261,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editPackorFile_pressed
 
     private void cmb_reboot_statechanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_reboot_statechanged
-        installation.getInfo().setRebootAction(cb_rebootOption.getSelectedItem().toString());                
+        installation.getInfo().setRebootAction(cmb_rebootOption.getSelectedItem().toString());                
     }//GEN-LAST:event_cmb_reboot_statechanged
 
     private void btn_out_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_out_pressed
@@ -1387,12 +1387,12 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton btn_selectPanel;
     private javax.swing.JButton btn_setLower;
     private javax.swing.JButton btn_setUpper;
-    private javax.swing.JComboBox cb_authors;
-    private javax.swing.JComboBox cb_rebootOption;
     private javax.swing.JCheckBox cb_resizable;
     private javax.swing.JCheckBox cb_runPrivilaged;
     private javax.swing.JCheckBox cb_useButtonIcons;
     private javax.swing.JCheckBox cb_useLabelIcons;
+    private javax.swing.JComboBox cmb_authors;
+    private javax.swing.JComboBox cmb_rebootOption;
     private javax.swing.JLabel lbl_applicationName;
     private javax.swing.JLabel lbl_authors;
     private javax.swing.JLabel lbl_avilableLanguages;
