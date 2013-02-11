@@ -1,8 +1,11 @@
 /*
- * Author data type which is used in IzPack ant build script.
+ * AuthorModel represents author tag of install.xml
  */
-package org.biz.izpack.models;
 
+package org.biz.izpack.models.information;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import org.biz.izpack.EmailValidator;
 
@@ -11,12 +14,16 @@ import org.biz.izpack.EmailValidator;
  * @author basar
  */
 
-public class Author {
+@XmlAccessorType(XmlAccessType.FIELD)
+public class AuthorModel {
     
+    @XmlAttribute(name="name")
     private String _name;
+    
+    @XmlAttribute(name="email")
     private String _email;
 
-    @XmlAttribute(name="name")
+    
     public String getName() {
         return _name;
     }
@@ -24,7 +31,7 @@ public class Author {
     public void setName(String name) {
         this._name = name;
     }
-    @XmlAttribute(name="email")
+    
     public String getEmail() {
         return _email;
     }

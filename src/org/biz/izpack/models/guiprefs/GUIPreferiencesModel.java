@@ -1,8 +1,8 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * GUIPreferiencesModel represents the guiprefs tag of install.xml
  */
-package org.biz.izpack.models;
+
+package org.biz.izpack.models.guiprefs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.biz.izpack.models.modelhelpers.BooleanAdapter;
 
 /**
  *
  * @author basar
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement
-public class GUIPrefs{
+public class GUIPreferiencesModel{
     
     @XmlAttribute(name="width")
     private int _width;
@@ -29,7 +29,7 @@ public class GUIPrefs{
     @XmlJavaTypeAdapter( BooleanAdapter.class )
     private Boolean _resizable = false;
     @XmlElement(name="modifier")
-    private List<Modifier> _modifierList = new ArrayList<Modifier>();
+    private List<ModifierModel> _modifiers;
 
     public int getWidth() {
         return _width;
@@ -55,8 +55,11 @@ public class GUIPrefs{
         this._resizable = _resizable;
     }
     
-    public Modifier getModifierByKey(String key) {
-        for (Modifier itr : _modifierList) {
+    public ModifierModel getModifierByKey(String key) {
+        if (_modifiers == null) {
+            _modifiers = new ArrayList<ModifierModel>();
+        }
+        for (ModifierModel itr : _modifiers) {
             if (itr.getKey().equals(key)) {
                 return itr;
             }
@@ -64,11 +67,12 @@ public class GUIPrefs{
         return null;
     }
     
-    public void addModifier(Modifier modifier) {
-        _modifierList.add(modifier);
+    public void addModifier(ModifierModel modifier) {
+        _modifiers.add(modifier);
     }
     
-    public void removeModifier(Modifier modifier) {
-        _modifierList.remove(modifier);
+    public void removeModifier(ModifierModel modifier) {
+        _modifiers.remove(modifier);
     }
+    
 }

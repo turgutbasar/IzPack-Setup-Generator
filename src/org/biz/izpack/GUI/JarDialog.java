@@ -4,9 +4,8 @@
  */
 package org.biz.izpack.GUI;
 
-import org.biz.izpack.models.Jar;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
+import org.biz.izpack.models.jars.JarModel;
 
 /**
  *
@@ -16,18 +15,18 @@ public class JarDialog extends javax.swing.JDialog {
     
     private String _fileName;
     
-    private Jar _jar;
+    private JarModel _jar;
 
     /**
      * Creates new form JarDialog
      */
-    public JarDialog(java.awt.Frame parent, Jar selected) {
+    public JarDialog(java.awt.Frame parent, JarModel selected) {
         super(parent, true);
         initComponents();
         if (this._jar != null) {
             this._jar = selected;
         } else {
-            this._jar = new Jar();
+            this._jar = new JarModel();
         }
     }
 
@@ -110,11 +109,12 @@ public class JarDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_ok_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ok_pressed
-        if (_fileName == null)
+        if (_fileName == null) {
             return;
+        }
         _jar.setSource(_fileName);
         _jar.setStage((String)cb_stage.getSelectedItem());
-        MainFrame.installation.addJar(_jar);
+        MainFrame.installation.getJarsModel().add(_jar);
         this.setVisible(false);
     }//GEN-LAST:event_btn_ok_pressed
 

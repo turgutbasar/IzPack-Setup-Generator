@@ -1,8 +1,8 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * PackModel represents the pack tag of install.xml
  */
-package org.biz.izpack.models;
+
+package org.biz.izpack.models.packs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,15 +10,16 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.biz.izpack.models.modelhelpers.BooleanAdapter;
 
 /**
  *
  * @author basar
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Pack {
+public class PackModel {
     
     @XmlAttribute(name="name")
     private String _name;
@@ -28,7 +29,7 @@ public class Pack {
     @XmlElement(name="description")
     private String _description;
     @XmlElement(name="file")
-    private List<File> _fileList = new ArrayList<File>();
+    private List<FileModel> _files;
 
     public String getName() {
         return _name;
@@ -54,18 +55,11 @@ public class Pack {
         this._description = _description;
     }
 
-    public File[] getFiles() {
-        File[] tmpList = new File[_fileList.size()];
-        tmpList = _fileList.toArray(tmpList);
-        return tmpList;
-    }
-    
-    public void addFile(File file) {
-        _fileList.add(file);
-    }
-    
-    public void removeFile(File file) {
-        _fileList.remove(file);
+    public List<FileModel> getFiles() {
+        if (_files == null) {
+            _files = new ArrayList<FileModel>();
+        }
+        return _files;
     }
 
     @Override

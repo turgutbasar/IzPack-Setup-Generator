@@ -4,8 +4,8 @@
  */
 package org.biz.izpack.GUI;
 
-import org.biz.izpack.models.Author;
 import javax.swing.JOptionPane;
+import org.biz.izpack.models.information.AuthorModel;
 
 /**
  *
@@ -13,18 +13,18 @@ import javax.swing.JOptionPane;
  */
 public class AuthorDialog extends javax.swing.JDialog {
     
-    private Author _author;
+    private AuthorModel _author;
 
     /**
      * Creates new form AuthorDialog
      */
-    public AuthorDialog(java.awt.Frame parent, Author selected) {
+    public AuthorDialog(java.awt.Frame parent, AuthorModel selected) {
         super(parent, true);
         initComponents();
         if (selected != null) {
             this._author = selected;
         } else {
-            this._author = new Author();
+            this._author = new AuthorModel();
         }
     }
 
@@ -119,7 +119,7 @@ public class AuthorDialog extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Please enter a valid email.", "Email is not valid!", JOptionPane.ERROR_MESSAGE);
             return;
         } 
-        MainFrame.installation.getInfo().addAuthor(_author);
+        MainFrame.installation.getInformationModel().getAuthors().add(_author);
         this.setVisible(false);
     }//GEN-LAST:event_btn_ok_pressed
 

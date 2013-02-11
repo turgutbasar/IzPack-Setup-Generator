@@ -4,11 +4,10 @@
  */
 package org.biz.izpack.GUI;
 
-import org.biz.izpack.*;
-import org.biz.izpack.models.Pack;
-import org.biz.izpack.models.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import org.biz.izpack.models.packs.FileModel;
+import org.biz.izpack.models.packs.PackModel;
 
 /**
  *
@@ -17,20 +16,20 @@ import javax.swing.JOptionPane;
 public class FileDialog extends javax.swing.JDialog {
     
     private String _fileName;
-    private File _file;
-    private Pack _parentNode;
+    private FileModel _file;
+    private PackModel _parentNode;
 
     /**
      * Creates new form FileDialog
      */
-    public FileDialog(java.awt.Frame parent, Pack parentNode, File selected) {
+    public FileDialog(java.awt.Frame parent, PackModel parentNode, FileModel selected) {
         super(parent, true);
         initComponents();
         this._parentNode = parentNode;
         if (selected != null) {
             this._file = selected;
         } else {
-            this._file = new File();
+            this._file = new FileModel();
         }
     }
 
@@ -125,8 +124,8 @@ public class FileDialog extends javax.swing.JDialog {
         tf_targetDir.requestFocus(false);
         _file.setSource(_fileName); 
         _file.setTargetDir(tf_targetDir.getText());
-        _parentNode.addFile(_file);
-        MainFrame.installation.getPacks().addPack(_parentNode);
+        _parentNode.getFiles().add(_file);
+        MainFrame.installation.getPacksModel().getPacks().add(_parentNode);
         this.setVisible(false);
     }//GEN-LAST:event_btn_ok_pressed
 

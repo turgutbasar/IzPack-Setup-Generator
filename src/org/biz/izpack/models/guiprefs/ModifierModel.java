@@ -1,28 +1,30 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * ModifierModel represents the modifier tag of install.xml
  */
-package org.biz.izpack.models;
 
+package org.biz.izpack.models.guiprefs;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 
 /**
  *
  * @author basar
  */
-public class Modifier {
-    
-    
-    private String key;
-    
-    private String value;
+
+@XmlAccessorType(XmlAccessType.FIELD)
+public class ModifierModel {
     
     @XmlAttribute(name="key")
+    private String key;
+    @XmlAttribute(name="value")
+    private String value;
+
     public String getKey() {
         return key;
     }
-    
-    @XmlAttribute(name="value")
+
     public String getValue() {
         return value;
     }

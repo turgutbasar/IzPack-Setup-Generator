@@ -6,7 +6,7 @@ package org.biz.izpack.GUI;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import org.biz.izpack.models.Resource;
+import org.biz.izpack.models.resources.ResourceModel;
 
 /**
  *
@@ -16,18 +16,18 @@ public class ResourceDialog extends javax.swing.JDialog {
     
     private String _fileName;
     
-    private Resource _resource;
+    private ResourceModel _resource;
 
     /**
      * Creates new form ResourceDialog
      */
-    public ResourceDialog(java.awt.Frame parent, Resource selected) {
+    public ResourceDialog(java.awt.Frame parent, ResourceModel selected) {
         super(parent, true);
         initComponents();
         if (this._resource != null) {
             this._resource = selected;
         } else {
-            this._resource = new Resource();
+            this._resource = new ResourceModel();
         }
     }
 
@@ -120,7 +120,7 @@ public class ResourceDialog extends javax.swing.JDialog {
         }
         _resource.setId(tf_resId.getText());
         _resource.setSource(_fileName);
-        MainFrame.installation.getResources().addResource(_resource);
+        MainFrame.installation.getResourcesModel().getResources().add(_resource);
         this.setVisible(false);
     }//GEN-LAST:event_btn_ok_pressed
 

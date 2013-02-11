@@ -1,8 +1,8 @@
 /*
- * Information tag representation for IzPack Install.xml 
- * Ant build script.
+ * InformationModel represents info tag of install.xml
  */
-package org.biz.izpack.models;
+
+package org.biz.izpack.models.information;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +11,15 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.biz.izpack.models.modelhelpers.BooleanAdapter;
 
 /**
  *
  * @author basar
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Information {
+public class InformationModel {
     
     @XmlElement(name="appname")
     private String _appName;
@@ -27,7 +29,7 @@ public class Information {
     
     @XmlElementWrapper(name="authors")
     @XmlElement(name="author")
-    private List<Author> _authors = new ArrayList<Author>();
+    private List<AuthorModel> _authors;
     
     @XmlElement(name="url")
     private String _URL;
@@ -36,8 +38,8 @@ public class Information {
     private String _rebootAction;
     
     @XmlElement(name="run-privilaged")
-    @XmlJavaTypeAdapter( BooleanAdapter.class )
-    private Boolean _runPrivilaged = false;
+    @XmlJavaTypeAdapter(BooleanAdapter.class)
+    private Boolean _runPrivilaged;
 
     public String getAppName() {
         return _appName;
@@ -53,20 +55,6 @@ public class Information {
 
     public void setVersion(String version) {
         this._version = version;
-    }
-    
-    public Author[] getAuthors() {
-        Author[] tmpList = new Author[_authors.size()];
-        tmpList = _authors.toArray(tmpList);
-        return tmpList;
-    }
-    
-    public void addAuthor(Author author) {
-        _authors.add(author);
-    }
-    
-    public void removeAuthor(Author author) {
-        _authors.remove(author);
     }
 
     public String getURL() {
@@ -91,6 +79,13 @@ public class Information {
 
     public void setRunPrivilaged(Boolean runPrivilaged) {
         this._runPrivilaged = runPrivilaged;
+    }
+
+    public List<AuthorModel> getAuthors() {
+        if (_authors == null) {
+            _authors = new ArrayList<AuthorModel>();
+        }
+        return _authors;
     }
      
 }

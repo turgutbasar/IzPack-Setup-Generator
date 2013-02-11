@@ -1,8 +1,8 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * FileModel represents the file tag of install.xml
  */
-package org.biz.izpack.models;
+
+package org.biz.izpack.models.packs;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -12,8 +12,9 @@ import javax.xml.bind.annotation.XmlAttribute;
  *
  * @author basar
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
-public class File {
+public class FileModel {
     
     @XmlAttribute(name="source")
     private String _source;

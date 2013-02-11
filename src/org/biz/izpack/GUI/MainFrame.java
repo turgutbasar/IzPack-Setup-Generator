@@ -4,10 +4,12 @@
 package org.biz.izpack.GUI;
 
 import java.awt.Color;
+import java.awt.Panel;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,15 +21,15 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import org.biz.izpack.models.Author;
-import org.biz.izpack.models.File;
-import org.biz.izpack.models.Installation;
-import org.biz.izpack.models.Jar;
-import org.biz.izpack.models.LangPack;
-import org.biz.izpack.models.Modifier;
-import org.biz.izpack.models.Pack;
-import org.biz.izpack.models.Panel;
-import org.biz.izpack.models.Resource;
+import org.biz.izpack.models.guiprefs.ModifierModel;
+import org.biz.izpack.models.information.AuthorModel;
+import org.biz.izpack.models.installation.InstallationModel;
+import org.biz.izpack.models.jars.JarModel;
+import org.biz.izpack.models.locale.LanguagePackModel;
+import org.biz.izpack.models.packs.FileModel;
+import org.biz.izpack.models.packs.PackModel;
+import org.biz.izpack.models.panels.PanelModel;
+import org.biz.izpack.models.resources.ResourceModel;
 
 /**
  *
@@ -35,9 +37,11 @@ import org.biz.izpack.models.Resource;
  */
 public class MainFrame extends javax.swing.JFrame {
     
+    public static List<PanelModel> avilablePanels = new ArrayList<PanelModel>();
+    
     private String _fileName;
     
-    public static Installation installation = new Installation();
+    public static InstallationModel installation = new InstallationModel();
     
     private class DlgFocusListener implements WindowFocusListener {
         
@@ -51,14 +55,16 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         public void windowLostFocus(WindowEvent e) {
-            if (_type.equals(Author.class)) {
+            if (_type.equals(AuthorModel.class)) {
                 populateCBAuthors();
-            } else if (_type.equals(Resource.class)) {
+            } else if (_type.equals(ResourceModel.class)) {
                 populateLstResources();
-            } else if (_type.equals(Jar.class)) {
+            } else if (_type.equals(JarModel.class)) {
                 populateLstJars();
-            } else if (_type.equals(Pack.class)) {
+            } else if (_type.equals(PackModel.class)) {
                 populateTreePacks();
+            } else if (_type.equals(PanelModel.class)) {
+                populateListPanels();
             }
         }
         
@@ -71,48 +77,51 @@ public class MainFrame extends javax.swing.JFrame {
     private DlgFocusListener _jarListener;
     
     private DlgFocusListener _packListener;
+    
+    private DlgFocusListener _panelListener;
 
     public MainFrame() {
         initComponents();
         initLists();
-        this._authorListener = new DlgFocusListener(Author.class);
-        this._resourceListener = new DlgFocusListener(Resource.class);
-        this._jarListener = new DlgFocusListener(Jar.class);
-        this._packListener = new DlgFocusListener(Pack.class);
+        this._authorListener = new DlgFocusListener(AuthorModel.class);
+        this._resourceListener = new DlgFocusListener(ResourceModel.class);
+        this._jarListener = new DlgFocusListener(JarModel.class);
+        this._packListener = new DlgFocusListener(PackModel.class);
+        this._panelListener = new DlgFocusListener(PanelModel.class);
         initLangs();
         initPacks();
     }
     
     private void populateCBAuthors() {
         cmb_authors.removeAllItems();
-        Author[] authors = installation.getInfo().getAuthors();
-        if (authors.length == 0) {
+        List<AuthorModel> authors = installation.getInformationModel().getAuthors();
+        if (authors.isEmpty()) {
             return;
         }
-        for (Author itr : authors) {
+        for (AuthorModel itr : authors) {
             cmb_authors.addItem(itr);
         }
     }
     
     private void populateLstResources() {
-        ((DefaultListModel<Resource>)lst_resources.getModel()).removeAllElements();
-        Resource[] resources = installation.getResources().getAllResources();
-        if (resources.length == 0) {
+        ((DefaultListModel<ResourceModel>)lst_resources.getModel()).removeAllElements();
+        List<ResourceModel> resources = installation.getResourcesModel().getResources();
+        if (resources.isEmpty()) {
             return;
         }
-        for (Resource itr : resources) {
-            ((DefaultListModel<Resource>)lst_resources.getModel()).addElement(itr);
+        for (ResourceModel itr : resources) {
+            ((DefaultListModel<ResourceModel>)lst_resources.getModel()).addElement(itr);
         }
     }
     
     private void populateLstJars() {
-        ((DefaultListModel<Jar>)lst_jars.getModel()).removeAllElements();
-        Jar[] jars = installation.getJars();
-        if (jars.length == 0) {
+        ((DefaultListModel<JarModel>)lst_jars.getModel()).removeAllElements();
+        List<JarModel> jars = installation.getJarsModel();
+        if (jars.isEmpty()) {
             return;
         }
-        for (Jar itr : jars) {
-            ((DefaultListModel<Jar>)lst_jars.getModel()).addElement(itr);
+        for (JarModel itr : jars) {
+            ((DefaultListModel<JarModel>)lst_jars.getModel()).addElement(itr);
         }
     }
     
@@ -121,50 +130,59 @@ public class MainFrame extends javax.swing.JFrame {
         DefaultMutableTreeNode root = (DefaultMutableTreeNode)model.getRoot();
         root.removeAllChildren();
         model.reload(root);
-        // Wierd but OK
-        Pack[] packs = installation.getPacks().getPacks();
-        if (packs.length == 0) {
+        List<PackModel> packs = installation.getPacksModel().getPacks();
+        if (packs.isEmpty()) {
             return;
         }
-        for (Pack itr : packs) {
+        for (PackModel itr : packs) {
             DefaultMutableTreeNode tmpNode = new DefaultMutableTreeNode(itr);
-            for (File itr2 : itr.getFiles()) {
+            for (FileModel itr2 : itr.getFiles()) {
                 tmpNode.add(new DefaultMutableTreeNode(itr2));
             }
             root.add(tmpNode);
         }
     }
     
+    private void populateListPanels() {
+        ((DefaultListModel<PanelModel>)lst_avilablePanels.getModel()).removeAllElements();
+        if (avilablePanels.isEmpty()) {
+            return;
+        }
+        for (PanelModel itr : avilablePanels) {
+            ((DefaultListModel<PanelModel>)lst_avilablePanels.getModel()).addElement(itr);
+        }
+    }
+    
     private void initLists() {
         // Lack of other lists
-        lst_avilableLanguages.setModel(new DefaultListModel<LangPack>());
-        lst_selectedLanguages.setModel(new DefaultListModel<LangPack>());
-        lst_resources.setModel(new DefaultListModel<Resource>());
-        lst_jars.setModel(new DefaultListModel<Jar>()); 
-        lst_avilablePanels.setModel(new DefaultListModel<Panel>());
-        lst_selectedPanels.setModel(new DefaultListModel<Panel>());
+        lst_avilableLanguages.setModel(new DefaultListModel<LanguagePackModel>());
+        lst_selectedLanguages.setModel(new DefaultListModel<LanguagePackModel>());
+        lst_resources.setModel(new DefaultListModel<ResourceModel>());
+        lst_jars.setModel(new DefaultListModel<JarModel>()); 
+        lst_avilablePanels.setModel(new DefaultListModel<PanelModel>());
+        lst_selectedPanels.setModel(new DefaultListModel<PanelModel>());
     }
         
     private void initLangs() {
-        LangPack tr = new LangPack();
+        LanguagePackModel tr = new LanguagePackModel();
         tr.setName("tur");
-        LangPack fr = new LangPack();
+        LanguagePackModel fr = new LanguagePackModel();
         fr.setName("fra");
-        LangPack en = new LangPack();
+        LanguagePackModel en = new LanguagePackModel();
         en.setName("eng");
-        ((DefaultListModel<LangPack>)lst_avilableLanguages.getModel()).addElement(tr);
-        ((DefaultListModel<LangPack>)lst_avilableLanguages.getModel()).addElement(en);
-        ((DefaultListModel<LangPack>)lst_avilableLanguages.getModel()).addElement(fr);
+        ((DefaultListModel<LanguagePackModel>)lst_avilableLanguages.getModel()).addElement(tr);
+        ((DefaultListModel<LanguagePackModel>)lst_avilableLanguages.getModel()).addElement(en);
+        ((DefaultListModel<LanguagePackModel>)lst_avilableLanguages.getModel()).addElement(fr);
     }
     
     private void initPacks() {
         // TODO : There must be a problem about method name
-        Panel panel = new Panel();
+        PanelModel panel = new PanelModel();
         panel.setClassName("HelloPanel");
-        Panel panel2 = new Panel();
+        PanelModel panel2 = new PanelModel();
         panel2.setClassName("HelloPanel2");
-        ((DefaultListModel<Panel>)lst_avilablePanels.getModel()).addElement(panel);
-        ((DefaultListModel<Panel>)lst_avilablePanels.getModel()).addElement(panel2);
+        ((DefaultListModel<PanelModel>)lst_avilablePanels.getModel()).addElement(panel);
+        ((DefaultListModel<PanelModel>)lst_avilablePanels.getModel()).addElement(panel2);
     }
 
     /**
@@ -726,14 +744,14 @@ public class MainFrame extends javax.swing.JFrame {
         btn_selectPanel.setText(">>");
         btn_selectPanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_addPanel_pressed(evt);
+                btn_selectPanel_pressed(evt);
             }
         });
 
         btn_deselectPanel.setText("<<");
         btn_deselectPanel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_removePanel(evt);
+                btn_deselectPanel(evt);
             }
         });
 
@@ -751,14 +769,29 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         btn_setLower.setText("↓");
+        btn_setLower.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_setLower_pressed(evt);
+            }
+        });
 
         btn_addPanel.setBackground(new java.awt.Color(51, 255, 0));
         btn_addPanel.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
         btn_addPanel.setText("+");
+        btn_addPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addPanel_pressed(evt);
+            }
+        });
 
         btn_editPanel.setBackground(new java.awt.Color(255, 255, 0));
         btn_editPanel.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
         btn_editPanel.setText("E");
+        btn_editPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_editPanel_pressed(evt);
+            }
+        });
 
         btn_delPanel.setBackground(new java.awt.Color(255, 0, 0));
         btn_delPanel.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
@@ -766,6 +799,11 @@ public class MainFrame extends javax.swing.JFrame {
         btn_delPanel.setMaximumSize(new java.awt.Dimension(39, 19));
         btn_delPanel.setMinimumSize(new java.awt.Dimension(39, 19));
         btn_delPanel.setPreferredSize(new java.awt.Dimension(39, 19));
+        btn_delPanel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_delPanel_pressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnl_panelsLayout = new javax.swing.GroupLayout(pnl_panels);
         pnl_panels.setLayout(pnl_panelsLayout);
@@ -1010,11 +1048,12 @@ public class MainFrame extends javax.swing.JFrame {
     private void btn_generate_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_generate_pressed
         try {                                      
             // Generate Process
-            if (_fileName == null)
+            if (_fileName == null) {
                 return;
+            }
             FileOutputStream fos = new FileOutputStream(_fileName);
             try {
-                JAXBContext jaxbContext = JAXBContext.newInstance(Installation.class);
+                JAXBContext jaxbContext = JAXBContext.newInstance(InstallationModel.class);
      
                 Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
                 jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -1036,13 +1075,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void tf_applicationName_lostfocus(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_applicationName_lostfocus
         if (!tf_applicationName.getText().isEmpty()) {
-            installation.getInfo().setAppName(tf_applicationName.getText());
+            installation.getInformationModel().setAppName(tf_applicationName.getText());
         }
     }//GEN-LAST:event_tf_applicationName_lostfocus
 
     private void tf_version_lostfocus(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_version_lostfocus
         if (!tf_version.getText().isEmpty()) {
-            installation.getInfo().setVersion(tf_version.getText());
+            installation.getInformationModel().setVersion(tf_version.getText());
         }
     }//GEN-LAST:event_tf_version_lostfocus
 
@@ -1054,20 +1093,20 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_addAuthor_pressed
 
     private void btn_delAuthor_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_delAuthor_pressed
-        Author selected = (Author)cmb_authors.getSelectedItem();
+        AuthorModel selected = (AuthorModel)cmb_authors.getSelectedItem();
         if (selected == null) {
             return;
         }
-        installation.getInfo().removeAuthor(selected);
+        installation.getInformationModel().getAuthors().remove(selected);
         populateCBAuthors();
     }//GEN-LAST:event_btn_delAuthor_pressed
 
     private void btn_editAuthor_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editAuthor_pressed
-        Author selected = (Author)cmb_authors.getSelectedItem();
+        AuthorModel selected = (AuthorModel)cmb_authors.getSelectedItem();
         if (selected == null) {
             return;
         }
-        installation.getInfo().removeAuthor(selected);
+        installation.getInformationModel().getAuthors().remove(selected);
         AuthorDialog dlg = new AuthorDialog(this, selected);
         dlg.setAlwaysOnTop(true);
         dlg.addWindowFocusListener(_authorListener);
@@ -1076,91 +1115,91 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void tf_url_focuslost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_url_focuslost
         if (!tf_url.getText().isEmpty()) {
-            installation.getInfo().setURL(tf_url.getText());
+            installation.getInformationModel().setURL(tf_url.getText());
         }
     }//GEN-LAST:event_tf_url_focuslost
 
     private void cb_runPrivilaged_statechanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_runPrivilaged_statechanged
-        installation.getInfo().setRunPrivilaged(cb_runPrivilaged.isSelected());
+        installation.getInformationModel().setRunPrivilaged(cb_runPrivilaged.isSelected());
     }//GEN-LAST:event_cb_runPrivilaged_statechanged
 
     private void tf_width_focuslost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_width_focuslost
         // TODO : Insert Integer cast try catch
         if (!tf_width.getText().isEmpty()) {
-            installation.getGuiPrefs().setWidth(Integer.parseInt(tf_width.getText()));
+            installation.getGuiPreferiencesModel().setWidth(Integer.parseInt(tf_width.getText()));
         }
     }//GEN-LAST:event_tf_width_focuslost
 
     private void tf_height_focuslost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_height_focuslost
         // TODO : Insert Integer cast try catch
         if (!tf_height.getText().isEmpty()) {
-            installation.getGuiPrefs().setHeight(Integer.parseInt(tf_height.getText()));
+            installation.getGuiPreferiencesModel().setHeight(Integer.parseInt(tf_height.getText()));
         }
     }//GEN-LAST:event_tf_height_focuslost
 
     private void tf_labelGap_focuslost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_labelGap_focuslost
         if (!tf_labelGap.getText().isEmpty()) {
-            Modifier labelGap = (Modifier)installation.getGuiPrefs().getModifierByKey("labelGap");
+            ModifierModel labelGap = (ModifierModel)installation.getGuiPreferiencesModel().getModifierByKey("labelGap");
             if (labelGap == null) { 
-                labelGap = new Modifier();
+                labelGap = new ModifierModel();
                 labelGap.setKey("labelGap");
             } else {
-                installation.getGuiPrefs().removeModifier(labelGap);
+                installation.getGuiPreferiencesModel().removeModifier(labelGap);
             }
             labelGap.setValue(tf_labelGap.getText());
-            installation.getGuiPrefs().addModifier(labelGap);
+            installation.getGuiPreferiencesModel().addModifier(labelGap);
         }
     }//GEN-LAST:event_tf_labelGap_focuslost
 
     private void cb_resizable_statechanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_resizable_statechanged
-        installation.getGuiPrefs().setResizable(cb_resizable.isSelected());
+        installation.getGuiPreferiencesModel().setResizable(cb_resizable.isSelected());
     }//GEN-LAST:event_cb_resizable_statechanged
 
     private void cb_useButtonIcons_statechanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_useButtonIcons_statechanged
-        Modifier useButtonIcons = installation.getGuiPrefs().getModifierByKey("useButtonIcons");
+        ModifierModel useButtonIcons = installation.getGuiPreferiencesModel().getModifierByKey("useButtonIcons");
         if (useButtonIcons == null) { 
-            useButtonIcons = new Modifier();
+            useButtonIcons = new ModifierModel();
             useButtonIcons.setKey("useButtonIcons");
         } else {
-            installation.getGuiPrefs().removeModifier(useButtonIcons);
+            installation.getGuiPreferiencesModel().removeModifier(useButtonIcons);
         }
         useButtonIcons.setValue(cb_useButtonIcons.isSelected()?"yes":"no");
-        installation.getGuiPrefs().addModifier(useButtonIcons);
+        installation.getGuiPreferiencesModel().addModifier(useButtonIcons);
     }//GEN-LAST:event_cb_useButtonIcons_statechanged
 
     private void cb_useLabelIcons_statechanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_useLabelIcons_statechanged
-        Modifier useLabelIcons = installation.getGuiPrefs().getModifierByKey("useLabelIcons");
+        ModifierModel useLabelIcons = installation.getGuiPreferiencesModel().getModifierByKey("useLabelIcons");
         if (useLabelIcons == null) { 
-            useLabelIcons = new Modifier();
+            useLabelIcons = new ModifierModel();
             useLabelIcons.setKey("useLabelIcons");
         } else {
-            installation.getGuiPrefs().removeModifier(useLabelIcons);
+            installation.getGuiPreferiencesModel().removeModifier(useLabelIcons);
         }
         useLabelIcons.setValue(cb_useLabelIcons.isSelected()?"yes":"no");
-        installation.getGuiPrefs().addModifier(useLabelIcons);
+        installation.getGuiPreferiencesModel().addModifier(useLabelIcons);
     }//GEN-LAST:event_cb_useLabelIcons_statechanged
 
     private void btn_selectLang_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selectLang_pressed
-        List<LangPack> languages = lst_avilableLanguages.getSelectedValuesList();
+        List<LanguagePackModel> languages = lst_avilableLanguages.getSelectedValuesList();
         if (languages.isEmpty()) {
             return;
         }
-        for (LangPack itr : languages) {
-            installation.getLocale().addLangPack(itr);
-            ((DefaultListModel<LangPack>)(lst_selectedLanguages.getModel())).addElement(itr);
-            ((DefaultListModel<LangPack>)(lst_avilableLanguages.getModel())).removeElement(itr);
+        for (LanguagePackModel itr : languages) {
+            installation.getLocaleModel().getLangPacks().add(itr);
+            ((DefaultListModel<LanguagePackModel>)(lst_selectedLanguages.getModel())).addElement(itr);
+            ((DefaultListModel<LanguagePackModel>)(lst_avilableLanguages.getModel())).removeElement(itr);
         }
     }//GEN-LAST:event_btn_selectLang_pressed
 
     private void btn_deselectLang_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deselectLang_pressed
-        List<LangPack> languages = lst_selectedLanguages.getSelectedValuesList();
+        List<LanguagePackModel> languages = lst_selectedLanguages.getSelectedValuesList();
         if (languages.isEmpty()) {
             return;
         }
-        for (LangPack itr : languages) {
-            installation.getLocale().removeLangPack(itr);
-            ((DefaultListModel<LangPack>)(lst_avilableLanguages.getModel())).addElement(itr);
-            ((DefaultListModel<LangPack>)(lst_selectedLanguages.getModel())).removeElement(itr);
+        for (LanguagePackModel itr : languages) {
+            installation.getLocaleModel().getLangPacks().remove(itr);
+            ((DefaultListModel<LanguagePackModel>)(lst_avilableLanguages.getModel())).addElement(itr);
+            ((DefaultListModel<LanguagePackModel>)(lst_selectedLanguages.getModel())).removeElement(itr);
         }
     }//GEN-LAST:event_btn_deselectLang_pressed
 
@@ -1172,7 +1211,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_addResource_pressed
 
     private void btn_editResource_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editResource_pressed
-        List<Resource> selected = lst_resources.getSelectedValuesList();
+        List<ResourceModel> selected = lst_resources.getSelectedValuesList();
         if (selected.isEmpty()) {
             return;
         }
@@ -1180,7 +1219,7 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please chose only one item at the same time.", "Multiple selection!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        installation.getResources().removeResource(selected.get(0));
+        installation.getResourcesModel().getResources().remove(selected.get(0));
         ResourceDialog dlg = new ResourceDialog(this, selected.get(0));
         dlg.setAlwaysOnTop(true);
         dlg.addWindowFocusListener(_resourceListener);
@@ -1188,13 +1227,13 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editResource_pressed
 
     private void btn_delResource_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_delResource_pressed
-        List<Resource> selected = lst_resources.getSelectedValuesList();
+        List<ResourceModel> selected = lst_resources.getSelectedValuesList();
         if (selected.isEmpty()) {
             return;
         }
-        for (Resource itr : selected) {
-            installation.getResources().removeResource(itr);
-            ((DefaultListModel<Resource>)lst_resources.getModel()).removeElement(itr);
+        for (ResourceModel itr : selected) {
+            installation.getResourcesModel().getResources().remove(itr);
+            ((DefaultListModel<ResourceModel>)lst_resources.getModel()).removeElement(itr);
         }
     }//GEN-LAST:event_btn_delResource_pressed
 
@@ -1206,7 +1245,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_addJar_pressed
 
     private void btn_editJar_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editJar_pressed
-        List<Jar> selected = lst_jars.getSelectedValuesList();
+        List<JarModel> selected = lst_jars.getSelectedValuesList();
         if (selected.isEmpty()) {
             return;
         }
@@ -1214,7 +1253,7 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please chose only one item at the same time.", "Multiple selection!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        installation.removeJar(selected.get(0));
+        installation.getJarsModel().remove(selected.get(0));
         JarDialog dlg = new JarDialog(this, selected.get(0));
         dlg.setAlwaysOnTop(true);
         dlg.addWindowFocusListener(_jarListener);
@@ -1222,13 +1261,13 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editJar_pressed
 
     private void btn_delJar_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_delJar_pressed
-        List<Jar> selected = lst_jars.getSelectedValuesList();
+        List<JarModel> selected = lst_jars.getSelectedValuesList();
         if (selected.isEmpty()) {
             return;
         }
-        for (Jar itr : selected) {
-            installation.removeJar(itr);
-            ((DefaultListModel<Jar>)lst_jars.getModel()).removeElement(itr);
+        for (JarModel itr : selected) {
+            installation.getJarsModel().remove(itr);
+            ((DefaultListModel<JarModel>)lst_jars.getModel()).removeElement(itr);
         }
     }//GEN-LAST:event_btn_delJar_pressed
 
@@ -1245,8 +1284,8 @@ public class MainFrame extends javax.swing.JFrame {
             dlg.addWindowFocusListener(_packListener);
             dlg.setVisible(true); 
         } else if (selectedNode.getParent().toString().equals("packs")) {
-            installation.getPacks().removePack((Pack)selected);
-            FileDialog dlg = new FileDialog(this, (Pack)selected, null);
+            installation.getPacksModel().getPacks().remove((PackModel)selected);
+            FileDialog dlg = new FileDialog(this, (PackModel)selected, null);
             dlg.setAlwaysOnTop(true);
             dlg.addWindowFocusListener(_packListener);
             dlg.setVisible(true); 
@@ -1261,17 +1300,17 @@ public class MainFrame extends javax.swing.JFrame {
             return;
         }
         Object selected = selectedNode.getUserObject();
-        if (selected instanceof Pack) {
-            installation.getPacks().removePack((Pack)selected);
-            PackDialog dlg = new PackDialog(this, (Pack)selected);
+        if (selected instanceof PackModel) {
+            installation.getPacksModel().getPacks().remove((PackModel)selected);
+            PackDialog dlg = new PackDialog(this, (PackModel)selected);
             dlg.setAlwaysOnTop(true);
             dlg.addWindowFocusListener(_packListener);
             dlg.setVisible(true); 
-        } else if (selected instanceof File) {
-            Pack parentPack = (Pack)((DefaultMutableTreeNode)selectedNode.getParent()).getUserObject();
-            installation.getPacks().removePack(parentPack);
-            parentPack.removeFile((File)selected);
-            FileDialog dlg = new FileDialog(this, parentPack, (File)selected);
+        } else if (selected instanceof FileModel) {
+            PackModel parentPack = (PackModel)((DefaultMutableTreeNode)selectedNode.getParent()).getUserObject();
+            installation.getPacksModel().getPacks().remove(parentPack);
+            parentPack.getFiles().remove((FileModel)selected);
+            FileDialog dlg = new FileDialog(this, parentPack, (FileModel)selected);
             dlg.setAlwaysOnTop(true);
             dlg.addWindowFocusListener(_packListener);
             dlg.setVisible(true); 
@@ -1279,7 +1318,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_editPackorFile_pressed
 
     private void cmb_reboot_statechanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmb_reboot_statechanged
-        installation.getInfo().setRebootAction(cmb_rebootOption.getSelectedItem().toString());                
+        installation.getInformationModel().setRebootAction(cmb_rebootOption.getSelectedItem().toString());                
     }//GEN-LAST:event_cmb_reboot_statechanged
 
     private void btn_out_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_out_pressed
@@ -1314,40 +1353,42 @@ public class MainFrame extends javax.swing.JFrame {
             return;
         }
         Object selected = selectedNode.getUserObject();
-        if (selected instanceof Pack) {
-            installation.getPacks().removePack((Pack)selected);
-        } else if (selected instanceof File) {
-            Pack parentPack = (Pack)((DefaultMutableTreeNode)selectedNode.getParent()).getUserObject();
-            installation.getPacks().removePack(parentPack);
-            parentPack.removeFile((File)selected);
-            installation.getPacks().addPack(parentPack);
+        if (selected instanceof PackModel) {
+            installation.getPacksModel().getPacks().remove((PackModel)selected);
+        } else if (selected instanceof FileModel) {
+            PackModel parentPack = (PackModel)((DefaultMutableTreeNode)selectedNode.getParent()).getUserObject();
+            installation.getPacksModel().getPacks().remove(parentPack);
+            parentPack.getFiles().remove((FileModel)selected);
+            installation.getPacksModel().getPacks().add(parentPack);
         }
         populateTreePacks();
     }//GEN-LAST:event_btn_delPackorFile_pressed
 
-    private void btn_addPanel_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addPanel_pressed
-        List<Panel> panels = lst_avilablePanels.getSelectedValuesList();
+    private void btn_selectPanel_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_selectPanel_pressed
+        List<PanelModel> panels = lst_avilablePanels.getSelectedValuesList();
         if (panels.isEmpty()) {
             return;
         }
-        for (Panel itr : panels) {
-            installation.getPanels().addPanel(itr);
-            ((DefaultListModel<Panel>)(lst_selectedPanels.getModel())).addElement(itr);
-            ((DefaultListModel<Panel>)(lst_avilablePanels.getModel())).removeElement(itr);
+        for (PanelModel itr : panels) {
+            installation.getPanelsModel().getPanels().add(itr);
+            avilablePanels.remove(itr);
+            ((DefaultListModel<PanelModel>)(lst_selectedPanels.getModel())).addElement(itr);
+            ((DefaultListModel<PanelModel>)(lst_avilablePanels.getModel())).removeElement(itr);
         }
-    }//GEN-LAST:event_btn_addPanel_pressed
+    }//GEN-LAST:event_btn_selectPanel_pressed
 
-    private void btn_removePanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_removePanel
-        List<Panel> panels = lst_selectedPanels.getSelectedValuesList();
+    private void btn_deselectPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deselectPanel
+        List<PanelModel> panels = lst_selectedPanels.getSelectedValuesList();
         if (panels.isEmpty()) {
             return;
         }
-        for (Panel itr : panels) {
-            installation.getPanels().removePanel(itr);
-            ((DefaultListModel<Panel>)(lst_avilablePanels.getModel())).addElement(itr);
-            ((DefaultListModel<Panel>)(lst_selectedPanels.getModel())).removeElement(itr);
+        for (PanelModel itr : panels) {
+            installation.getPanelsModel().getPanels().remove(itr);
+            avilablePanels.add(itr);
+            ((DefaultListModel<PanelModel>)(lst_avilablePanels.getModel())).addElement(itr);
+            ((DefaultListModel<PanelModel>)(lst_selectedPanels.getModel())).removeElement(itr);
         }
-    }//GEN-LAST:event_btn_removePanel
+    }//GEN-LAST:event_btn_deselectPanel
 
     private void btn_setUpper_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_setUpper_pressed
         if (lst_selectedPanels.isSelectionEmpty()) {
@@ -1357,19 +1398,64 @@ public class MainFrame extends javax.swing.JFrame {
         if (selectedIndex == 0) {
             return;
         }
-        DefaultListModel<Panel> model = (DefaultListModel)lst_selectedPanels.getModel();
-        Panel selected = model.get(selectedIndex);
+        DefaultListModel<PanelModel> model = (DefaultListModel)lst_selectedPanels.getModel();
+        PanelModel selected = model.get(selectedIndex);
         // TODO : Implement an order change op on installation structure too.
         model.remove(selectedIndex);
         model.add(selectedIndex - 1, selected);
     }//GEN-LAST:event_btn_setUpper_pressed
 
+    private void btn_setLower_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_setLower_pressed
+        if (lst_selectedPanels.isSelectionEmpty()) {
+            return;
+        }
+        int selectedIndex = lst_selectedPanels.getSelectedIndex();
+        if (selectedIndex == lst_selectedPanels.getLastVisibleIndex()) {
+            return;
+        }
+        DefaultListModel<PanelModel> model = (DefaultListModel)lst_selectedPanels.getModel();
+        PanelModel selected = model.get(selectedIndex);
+        // TODO : Implement an order change op on installation structure too.
+        model.remove(selectedIndex);
+        model.add(selectedIndex + 1, selected);
+    }//GEN-LAST:event_btn_setLower_pressed
+
+    private void btn_addPanel_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addPanel_pressed
+        PanelDialog dlg = new PanelDialog(this, null);
+        dlg.setAlwaysOnTop(true);
+        dlg.addWindowFocusListener(_panelListener);
+        dlg.setVisible(true);
+    }//GEN-LAST:event_btn_addPanel_pressed
+
+    private void btn_editPanel_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editPanel_pressed
+        List<PanelModel> selected = lst_avilablePanels.getSelectedValuesList();
+        if (selected.isEmpty()) {
+            return;
+        }
+        if (selected.size() > 1) {
+            JOptionPane.showMessageDialog(null, "Please chose only one item at the same time.", "Multiple selection!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        avilablePanels.remove(selected.get(0));
+        PanelDialog dlg = new PanelDialog(this, selected.get(0));
+        dlg.setAlwaysOnTop(true);
+        dlg.addWindowFocusListener(_panelListener);
+        dlg.setVisible(true); 
+    }//GEN-LAST:event_btn_editPanel_pressed
+
+    private void btn_delPanel_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_delPanel_pressed
+        List<PanelModel> selected = lst_avilablePanels.getSelectedValuesList();
+        if (selected.isEmpty()) {
+            return;
+        }
+        for (PanelModel itr : selected) {
+            avilablePanels.remove(itr);
+            ((DefaultListModel<PanelModel>)lst_avilablePanels.getModel()).removeElement(itr);
+        }
+    }//GEN-LAST:event_btn_delPanel_pressed
+
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {

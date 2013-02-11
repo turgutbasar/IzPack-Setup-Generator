@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.biz.izpack.models;
+package org.biz.izpack.models.modelhelpers;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 

@@ -933,7 +933,7 @@
                 <Property name="text" type="java.lang.String" value="&gt;&gt;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_addPanel_pressed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_selectPanel_pressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btn_deselectPanel">
@@ -941,7 +941,7 @@
                 <Property name="text" type="java.lang.String" value="&lt;&lt;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_removePanel"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_deselectPanel"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="sp_selectedPanels">
@@ -980,6 +980,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x2193;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_setLower_pressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btn_addPanel">
               <Properties>
@@ -991,6 +994,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="+"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_addPanel_pressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btn_editPanel">
               <Properties>
@@ -1002,6 +1008,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="E"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_editPanel_pressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btn_delPanel">
               <Properties>
@@ -1022,6 +1031,9 @@
                   <Dimension value="[39, 19]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_delPanel_pressed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

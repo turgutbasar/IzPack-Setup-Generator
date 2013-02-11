@@ -4,7 +4,7 @@
  */
 package org.biz.izpack.GUI;
 
-import org.biz.izpack.models.Pack;
+import org.biz.izpack.models.packs.PackModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,19 +13,19 @@ import javax.swing.JOptionPane;
  */
 public class PackDialog extends javax.swing.JDialog {
     
-    private Pack _pack;
+    private PackModel _pack;
 
     /**
      * Creates new form PackDialog
      */
-    public PackDialog(java.awt.Frame parent, Pack selected) {
+    public PackDialog(java.awt.Frame parent, PackModel selected) {
         super(parent, true);
         
         initComponents();
         if (selected != null) {
             this._pack = selected;
         } else {
-            this._pack = new Pack();
+            this._pack = new PackModel();
         }
     }
 
@@ -139,7 +139,7 @@ public class PackDialog extends javax.swing.JDialog {
         _pack.setName(tf_name.getText());
         _pack.setDescription(tf_description.getText());
         _pack.setRequired(cb_required.isSelected());
-        MainFrame.installation.getPacks().addPack(_pack);
+        MainFrame.installation.getPacksModel().getPacks().add(_pack);
         this.setVisible(false);
     }//GEN-LAST:event_btn_ok_pressed
 

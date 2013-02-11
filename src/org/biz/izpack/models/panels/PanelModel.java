@@ -1,8 +1,8 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * PanelModel represents the panel tag of the install.xml
  */
-package org.biz.izpack.models;
+
+package org.biz.izpack.models.panels;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -12,8 +12,10 @@ import javax.xml.bind.annotation.XmlAttribute;
  *
  * @author basar
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Panel {
+public class PanelModel {
+    
     @XmlAttribute(name="classname")
     private String _className;
 
