@@ -842,8 +842,8 @@
                                               <Component id="sp_selectedPanels" min="-2" pref="109" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
                                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="btn_setUpper" max="32767" attributes="0"/>
                                                   <Component id="btn_setLower" max="32767" attributes="0"/>
+                                                  <Component id="btn_setUpper" max="32767" attributes="0"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -873,9 +873,9 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="btn_setLower" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                               <Component id="btn_setUpper" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                              <Component id="btn_setLower" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
@@ -970,12 +970,15 @@
             </Component>
             <Component class="javax.swing.JButton" name="btn_setUpper">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#x2193;"/>
+                <Property name="text" type="java.lang.String" value="&#x2191;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_setUpper_pressed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btn_setLower">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#x2191;"/>
+                <Property name="text" type="java.lang.String" value="&#x2193;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btn_addPanel">

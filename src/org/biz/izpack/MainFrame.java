@@ -149,9 +149,13 @@ public class MainFrame extends javax.swing.JFrame {
     }
     
     private void initPacks() {
+        // TODO : There must be a problem about method name
         Panel panel = new Panel();
         panel.setClassName("HelloPanel");
+        Panel panel2 = new Panel();
+        panel2.setClassName("HelloPanel2");
         ((DefaultListModel<Panel>)lst_avilablePanels.getModel()).addElement(panel);
+        ((DefaultListModel<Panel>)lst_avilablePanels.getModel()).addElement(panel2);
     }
 
     /**
@@ -730,9 +734,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         lbl_selectedPanels.setText("Used In Project");
 
-        btn_setUpper.setText("↓");
+        btn_setUpper.setText("↑");
+        btn_setUpper.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_setUpper_pressed(evt);
+            }
+        });
 
-        btn_setLower.setText("↑");
+        btn_setLower.setText("↓");
 
         btn_addPanel.setBackground(new java.awt.Color(51, 255, 0));
         btn_addPanel.setFont(new java.awt.Font("Tahoma", 1, 8)); // NOI18N
@@ -783,8 +792,8 @@ public class MainFrame extends javax.swing.JFrame {
                                         .addComponent(sp_selectedPanels, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(pnl_panelsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(btn_setUpper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(btn_setLower, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
+                                            .addComponent(btn_setLower, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(btn_setUpper, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         pnl_panelsLayout.setVerticalGroup(
@@ -803,9 +812,9 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(sp_selectedPanels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnl_panelsLayout.createSequentialGroup()
                         .addGap(32, 32, 32)
-                        .addComponent(btn_setLower)
+                        .addComponent(btn_setUpper)
                         .addGap(2, 2, 2)
-                        .addComponent(btn_setUpper))
+                        .addComponent(btn_setLower))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_panelsLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sp_avilablePanels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -1330,6 +1339,21 @@ public class MainFrame extends javax.swing.JFrame {
             ((DefaultListModel<Panel>)(lst_selectedPanels.getModel())).removeElement(itr);
         }
     }//GEN-LAST:event_btn_removePanel
+
+    private void btn_setUpper_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_setUpper_pressed
+        if (lst_selectedPanels.isSelectionEmpty()) {
+            return;
+        }
+        int selectedIndex = lst_selectedPanels.getSelectedIndex();
+        if (selectedIndex == 0) {
+            return;
+        }
+        DefaultListModel<Panel> model = (DefaultListModel)lst_selectedPanels.getModel();
+        Panel selected = model.get(selectedIndex);
+        // TODO : Implement an order change op on installation structure too.
+        model.remove(selectedIndex);
+        model.add(selectedIndex - 1, selected);
+    }//GEN-LAST:event_btn_setUpper_pressed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
