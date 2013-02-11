@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.biz.izpack;
+package org.biz.izpack.GUI;
 
+import org.biz.izpack.models.Jar;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 

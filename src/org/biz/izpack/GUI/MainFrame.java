@@ -1,7 +1,7 @@
 /*
  * This is the main frame for this application.
  */
-package org.biz.izpack;
+package org.biz.izpack.GUI;
 
 import java.awt.Color;
 import java.awt.event.WindowEvent;
@@ -19,6 +19,15 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import org.biz.izpack.models.Author;
+import org.biz.izpack.models.File;
+import org.biz.izpack.models.Installation;
+import org.biz.izpack.models.Jar;
+import org.biz.izpack.models.LangPack;
+import org.biz.izpack.models.Modifier;
+import org.biz.izpack.models.Pack;
+import org.biz.izpack.models.Panel;
+import org.biz.izpack.models.Resource;
 
 /**
  *
