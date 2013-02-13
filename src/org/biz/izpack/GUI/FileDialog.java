@@ -1,7 +1,7 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * FileDialog is a dialog to edit or add new file to the selected pack.
  */
+
 package org.biz.izpack.GUI;
 
 import javax.swing.JFileChooser;
@@ -13,20 +13,30 @@ import org.biz.izpack.models.packs.PackModel;
  *
  * @author basar
  */
+
 public class FileDialog extends javax.swing.JDialog {
     
     private String _fileName;
+    
     private FileModel _file;
+    
     private PackModel _parentNode;
-    private int _selectedIndex;
+    
+    private int _selectedFileIndex;
+    
+    private int _parentPackIndex;
 
     /**
      * Creates new form FileDialog
      */
-    public FileDialog(java.awt.Frame parent, PackModel parentNode, FileModel selected, int index) {
+    public FileDialog(java.awt.Frame parent, PackModel parentNode, FileModel selected, int fileIndex, int packIndex) {
         super(parent, true);
         initComponents();
+        
+        // Init vars
         this._parentNode = parentNode;
+        this._selectedFileIndex = fileIndex;
+        this._parentPackIndex = packIndex;
         if (selected != null) {
             this._file = selected;
         } else {
@@ -112,6 +122,7 @@ public class FileDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tf_targetDir_focuslost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_targetDir_focuslost
+        // Textfield validation
         if (tf_targetDir.getText().isEmpty() == true) {
             tf_targetDir.setText("Target Dir");
             JOptionPane.showMessageDialog(null, "Target Dir cannot be empty.", "Target Dir is empty!", JOptionPane.ERROR_MESSAGE);
@@ -119,25 +130,45 @@ public class FileDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_targetDir_focuslost
 
     private void btn_ok_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ok_pressed
+        // Validation for browse button
         if (_fileName == null){
             return;
         }
+        
+        // Force to textfield to validation
         tf_targetDir.requestFocus(false);
+        
+        // Set vars
         _file.setSource(_fileName); 
         _file.setTargetDir(tf_targetDir.getText());
-        if (_selectedIndex == -1) {
+        
+        // Remove old value from list (if exists) and add
+        // new one to the selected index (if exists)
+        if (_selectedFileIndex == -1) {
             _parentNode.getFiles().remove(_file);
             _parentNode.getFiles().add(_file);
         } else {
             _parentNode.getFiles().remove(_file);
-            _parentNode.getFiles().add(_selectedIndex,_file);
+            _parentNode.getFiles().add(_selectedFileIndex,_file);
         }
-        MainFrame.installation.getPacksModel().getPacks().add(_parentNode);
+        
+        // Insert parent node
+        if (_parentPackIndex == -1) {
+            MainFrame.installation.getPacksModel().getPacks().remove(_parentNode);
+            MainFrame.installation.getPacksModel().getPacks().add(_parentNode);
+        } else {
+            MainFrame.installation.getPacksModel().getPacks().remove(_parentNode);
+            MainFrame.installation.getPacksModel().getPacks().add(_parentPackIndex,_parentNode);
+        }
+        // Hide dialog
         this.setVisible(false);
     }//GEN-LAST:event_btn_ok_pressed
 
     private void btn_browse_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_browse_pressed
+        // File node filechooser for src chosing
         JFileChooser chooser = new JFileChooser();
+        
+        // It is allowed to set dir or file
         chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             _fileName = chooser.getSelectedFile().getAbsolutePath();

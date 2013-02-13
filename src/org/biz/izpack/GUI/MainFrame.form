@@ -499,7 +499,7 @@
             </Container>
             <Component class="javax.swing.JLabel" name="lbl_avilableLanguages">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Languages"/>
+                <Property name="text" type="java.lang.String" value="Avilable Languages"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btn_selectLang">
@@ -536,7 +536,7 @@
             </Container>
             <Component class="javax.swing.JLabel" name="lbl_selectedLanguages">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Used in Project"/>
+                <Property name="text" type="java.lang.String" value="Used In Project"/>
               </Properties>
             </Component>
           </SubComponents>

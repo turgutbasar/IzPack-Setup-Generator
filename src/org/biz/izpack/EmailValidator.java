@@ -2,6 +2,7 @@
  * This is an email validator. This taken from 
  * http://www.mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/
  */
+
 package org.biz.izpack;
 
 import java.util.regex.Matcher;
@@ -11,6 +12,7 @@ import java.util.regex.Pattern;
  *
  * @author basar
  */
+
 public class EmailValidator {
  
 	private Pattern pattern;

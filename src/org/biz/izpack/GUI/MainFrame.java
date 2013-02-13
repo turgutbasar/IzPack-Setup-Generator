@@ -522,7 +522,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         sp_avilableLanguages.setViewportView(lst_avilableLanguages);
 
-        lbl_avilableLanguages.setText("Languages");
+        lbl_avilableLanguages.setText("Avilable Languages");
 
         btn_selectLang.setText(">>");
         btn_selectLang.addActionListener(new java.awt.event.ActionListener() {
@@ -540,7 +540,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         sp_selectedLanguages.setViewportView(lst_selectedLanguages);
 
-        lbl_selectedLanguages.setText("Used in Project");
+        lbl_selectedLanguages.setText("Used In Project");
 
         javax.swing.GroupLayout pnl_languagesLayout = new javax.swing.GroupLayout(pnl_languages);
         pnl_languages.setLayout(pnl_languagesLayout);
@@ -1085,7 +1085,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_tf_version_lostfocus
 
     private void btn_addAuthor_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addAuthor_pressed
-        AuthorDialog dlg = new AuthorDialog(this, null);
+        AuthorDialog dlg = new AuthorDialog(this, null, -1);
         dlg.setAlwaysOnTop(true);
         dlg.addWindowFocusListener(_authorListener);
         dlg.setVisible(true);  
@@ -1105,8 +1105,8 @@ public class MainFrame extends javax.swing.JFrame {
         if (selected == null) {
             return;
         }
-        installation.getInformationModel().getAuthors().remove(selected);
-        AuthorDialog dlg = new AuthorDialog(this, selected);
+        int index = cmb_authors.getSelectedIndex();
+        AuthorDialog dlg = new AuthorDialog(this, selected, index);
         dlg.setAlwaysOnTop(true);
         dlg.addWindowFocusListener(_authorListener);
         dlg.setVisible(true);
@@ -1283,8 +1283,8 @@ public class MainFrame extends javax.swing.JFrame {
             dlg.addWindowFocusListener(_packListener);
             dlg.setVisible(true); 
         } else if (selectedNode.getParent().toString().equals("packs")) {
-            installation.getPacksModel().getPacks().remove((PackModel)selected);
-            FileDialog dlg = new FileDialog(this, (PackModel)selected, null, -1);
+            int parentIndex = selectedNode.getParent().getIndex(selectedNode);
+            FileDialog dlg = new FileDialog(this, (PackModel)selected, null, -1, parentIndex);
             dlg.setAlwaysOnTop(true);
             dlg.addWindowFocusListener(_packListener);
             dlg.setVisible(true); 
@@ -1295,19 +1295,24 @@ public class MainFrame extends javax.swing.JFrame {
     private void btn_editPackorFile_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editPackorFile_pressed
         // Get selected object
         DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)tree_packs.getSelectionPaths()[0].getLastPathComponent();
-        int index = selectedNode.getParent().getIndex(selectedNode);
-        if (selectedNode == null) {
+        if (selectedNode == null || selectedNode.getParent() == null) {
             return;
         }
+        int fileIndex;
+        int parentIndex;
         Object selected = selectedNode.getUserObject();
         if (selected instanceof PackModel) {
-            PackDialog dlg = new PackDialog(this, (PackModel)selected, index);
+            parentIndex = selectedNode.getParent().getIndex(selectedNode);
+            fileIndex = -1;
+            PackDialog dlg = new PackDialog(this, (PackModel)selected, fileIndex);
             dlg.setAlwaysOnTop(true);
             dlg.addWindowFocusListener(_packListener);
             dlg.setVisible(true); 
         } else if (selected instanceof FileModel) {
+            parentIndex = selectedNode.getParent().getParent().getIndex(selectedNode.getParent());
+            fileIndex = selectedNode.getParent().getIndex(selectedNode);;
             PackModel parentPack = (PackModel)((DefaultMutableTreeNode)selectedNode.getParent()).getUserObject();
-            FileDialog dlg = new FileDialog(this, parentPack, (FileModel)selected, index);
+            FileDialog dlg = new FileDialog(this, parentPack, (FileModel)selected, fileIndex, parentIndex);
             dlg.setAlwaysOnTop(true);
             dlg.addWindowFocusListener(_packListener);
             dlg.setVisible(true); 

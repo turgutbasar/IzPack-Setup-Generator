@@ -1,16 +1,18 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * JarDialog is a dialog to edit or add new jar entity.
  */
+
 package org.biz.izpack.GUI;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import org.biz.izpack.models.jars.JarModel;
 
 /**
  *
  * @author basar
  */
+
 public class JarDialog extends javax.swing.JDialog {
     
     private String _fileName;
@@ -25,6 +27,8 @@ public class JarDialog extends javax.swing.JDialog {
     public JarDialog(java.awt.Frame parent, JarModel selected, int selectedIndex) {
         super(parent, true);
         initComponents();
+        
+        // Set private vars
         if (selected != null) {
             this._jar = selected;
             this._selectedIndex = selectedIndex;
@@ -112,21 +116,30 @@ public class JarDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_ok_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ok_pressed
+        // File validation
         if (_fileName == null) {
+            JOptionPane.showMessageDialog(null, "File cannot be empty.", "File is not setted!", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
+        // Set vars
         _jar.setSource(_fileName);
         _jar.setStage((String)cb_stage.getSelectedItem());
+        
+        // Add or Update entity
         MainFrame.installation.getJarsModel().remove(_jar);
         if (_selectedIndex == -1) {
             MainFrame.installation.getJarsModel().add(_jar);
         } else {
             MainFrame.installation.getJarsModel().add(_selectedIndex, _jar);
         }
+        
+        // Hide dialog
         this.setVisible(false);
     }//GEN-LAST:event_btn_ok_pressed
 
     private void btn_browse_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_browse_pressed
+        // File chooser usage, not filtered
         JFileChooser chooser = new JFileChooser();
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             _fileName = chooser.getSelectedFile().getAbsolutePath();

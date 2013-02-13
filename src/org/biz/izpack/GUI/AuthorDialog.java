@@ -1,7 +1,8 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * AuthorDialog is a dialog to make possible an easy update 
+ * to the selected one or new author for installer.
  */
+
 package org.biz.izpack.GUI;
 
 import javax.swing.JOptionPane;
@@ -11,16 +12,21 @@ import org.biz.izpack.models.information.AuthorModel;
  *
  * @author basar
  */
+
 public class AuthorDialog extends javax.swing.JDialog {
     
     private AuthorModel _author;
+    
+    private int _selectedIndex;
 
     /**
      * Creates new form AuthorDialog
      */
-    public AuthorDialog(java.awt.Frame parent, AuthorModel selected) {
+    public AuthorDialog(java.awt.Frame parent, AuthorModel selected, int selectedIndex) {
         super(parent, true);
         initComponents();
+        // Set private values
+        this._selectedIndex = selectedIndex;
         if (selected != null) {
             this._author = selected;
         } else {
@@ -49,7 +55,7 @@ public class AuthorDialog extends javax.swing.JDialog {
 
         lbl_email.setText("Email : ");
 
-        tf_authorName.setText("Kade");
+        tf_authorName.setText("Kade Personel");
         tf_authorName.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 tf_authorName_focuslost(evt);
@@ -111,26 +117,43 @@ public class AuthorDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_ok_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ok_pressed
+        // To force textFields to validate
         tf_authorName.requestFocus(false);
         tf_email.requestFocus(false);
+        
+        // Set vars
         _author.setName(tf_authorName.getText());
+        // Email validation
         if (!_author.setEmail(tf_email.getText())) {
             tf_email.setText("destek@kade.com.tr");
             JOptionPane.showMessageDialog(null, "Please enter a valid email.", "Email is not valid!", JOptionPane.ERROR_MESSAGE);
             return;
         } 
-        MainFrame.installation.getInformationModel().getAuthors().add(_author);
+        
+        // Remove old value from list (if exists) and add
+        // new one to the selected index (if exists)
+        if (_selectedIndex == -1) {
+            MainFrame.installation.getInformationModel().getAuthors().remove(_author);
+            MainFrame.installation.getInformationModel().getAuthors().add(_author);
+        } else {
+            MainFrame.installation.getInformationModel().getAuthors().remove(_author);
+            MainFrame.installation.getInformationModel().getAuthors().add(_selectedIndex, _author);
+        }
+        
+        // Show dialog
         this.setVisible(false);
     }//GEN-LAST:event_btn_ok_pressed
 
     private void tf_authorName_focuslost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_authorName_focuslost
+        // Validation for textfields
         if (tf_authorName.getText().isEmpty() == true) {
-            tf_authorName.setText("Kade");
+            tf_authorName.setText("Başar Turgut");
             JOptionPane.showMessageDialog(null, "Author Name cannot be empty.", "Author Name is empty!", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_tf_authorName_focuslost
 
     private void tf_email_focuslost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tf_email_focuslost
+        // Validation for textfields
         if (tf_email.getText().isEmpty() == true) {
             tf_email.setText("destek@kade.com.tr");
             JOptionPane.showMessageDialog(null, "Email cannot be empty.", "Email is empty!", JOptionPane.ERROR_MESSAGE);

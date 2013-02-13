@@ -1,7 +1,7 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * PackDialog is a dialog to allow user to add or edit any package entity.
  */
+
 package org.biz.izpack.GUI;
 
 import javax.swing.JOptionPane;
@@ -11,6 +11,7 @@ import org.biz.izpack.models.packs.PackModel;
  *
  * @author basar
  */
+
 public class PackDialog extends javax.swing.JDialog {
     
     private PackModel _pack;
