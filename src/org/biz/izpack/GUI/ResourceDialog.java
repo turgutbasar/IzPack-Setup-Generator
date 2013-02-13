@@ -17,15 +17,18 @@ public class ResourceDialog extends javax.swing.JDialog {
     private String _fileName;
     
     private ResourceModel _resource;
+    
+    private int _selectedIndex;
 
     /**
      * Creates new form ResourceDialog
      */
-    public ResourceDialog(java.awt.Frame parent, ResourceModel selected) {
+    public ResourceDialog(java.awt.Frame parent, ResourceModel selected, int selectedIndex) {
         super(parent, true);
         initComponents();
-        if (this._resource != null) {
+        if (selected != null) {
             this._resource = selected;
+            this._selectedIndex = selectedIndex;
         } else {
             this._resource = new ResourceModel();
         }
@@ -120,7 +123,13 @@ public class ResourceDialog extends javax.swing.JDialog {
         }
         _resource.setId(tf_resId.getText());
         _resource.setSource(_fileName);
-        MainFrame.installation.getResourcesModel().getResources().add(_resource);
+        
+        MainFrame.installation.getResourcesModel().getResources().remove(_resource);
+        if (_selectedIndex == -1) {
+            MainFrame.installation.getResourcesModel().getResources().add(_resource);
+        } else {
+            MainFrame.installation.getResourcesModel().getResources().add(_selectedIndex, _resource);
+        }
         this.setVisible(false);
     }//GEN-LAST:event_btn_ok_pressed
 

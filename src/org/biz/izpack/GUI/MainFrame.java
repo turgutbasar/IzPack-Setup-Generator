@@ -1204,7 +1204,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_deselectLang_pressed
 
     private void btn_addResource_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addResource_pressed
-        ResourceDialog dlg = new ResourceDialog(this, null);
+        ResourceDialog dlg = new ResourceDialog(this, null, -1);
         dlg.setAlwaysOnTop(true);
         dlg.addWindowFocusListener(_resourceListener);
         dlg.setVisible(true); 
@@ -1219,8 +1219,8 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please chose only one item at the same time.", "Multiple selection!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        installation.getResourcesModel().getResources().remove(selected.get(0));
-        ResourceDialog dlg = new ResourceDialog(this, selected.get(0));
+        int oldIndex = lst_resources.getSelectedIndex();
+        ResourceDialog dlg = new ResourceDialog(this, selected.get(0), oldIndex);
         dlg.setAlwaysOnTop(true);
         dlg.addWindowFocusListener(_resourceListener);
         dlg.setVisible(true); 
@@ -1238,7 +1238,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_delResource_pressed
 
     private void btn_addJar_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addJar_pressed
-        JarDialog dlg = new JarDialog(this, null);
+        JarDialog dlg = new JarDialog(this, null, -1);
         dlg.setAlwaysOnTop(true);
         dlg.addWindowFocusListener(_jarListener);
         dlg.setVisible(true); 
@@ -1253,8 +1253,8 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please chose only one item at the same time.", "Multiple selection!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        installation.getJarsModel().remove(selected.get(0));
-        JarDialog dlg = new JarDialog(this, selected.get(0));
+        int oldIndex = lst_jars.getSelectedIndex();
+        JarDialog dlg = new JarDialog(this, selected.get(0), oldIndex);
         dlg.setAlwaysOnTop(true);
         dlg.addWindowFocusListener(_jarListener);
         dlg.setVisible(true); 

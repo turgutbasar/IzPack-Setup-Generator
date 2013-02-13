@@ -16,15 +16,18 @@ public class JarDialog extends javax.swing.JDialog {
     private String _fileName;
     
     private JarModel _jar;
+    
+    private int _selectedIndex;
 
     /**
      * Creates new form JarDialog
      */
-    public JarDialog(java.awt.Frame parent, JarModel selected) {
+    public JarDialog(java.awt.Frame parent, JarModel selected, int selectedIndex) {
         super(parent, true);
         initComponents();
-        if (this._jar != null) {
+        if (selected != null) {
             this._jar = selected;
+            this._selectedIndex = selectedIndex;
         } else {
             this._jar = new JarModel();
         }
@@ -114,7 +117,12 @@ public class JarDialog extends javax.swing.JDialog {
         }
         _jar.setSource(_fileName);
         _jar.setStage((String)cb_stage.getSelectedItem());
-        MainFrame.installation.getJarsModel().add(_jar);
+        MainFrame.installation.getJarsModel().remove(_jar);
+        if (_selectedIndex == -1) {
+            MainFrame.installation.getJarsModel().add(_jar);
+        } else {
+            MainFrame.installation.getJarsModel().add(_selectedIndex, _jar);
+        }
         this.setVisible(false);
     }//GEN-LAST:event_btn_ok_pressed
 

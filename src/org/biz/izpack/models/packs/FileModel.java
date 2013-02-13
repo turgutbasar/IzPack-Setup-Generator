@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class FileModel {
     
-    @XmlAttribute(name="source")
+    @XmlAttribute(name="src")
     private String _source;
     
     @XmlAttribute(name="targetdir")
