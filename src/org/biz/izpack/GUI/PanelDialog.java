@@ -15,13 +15,16 @@ import org.biz.izpack.models.panels.PanelModel;
 public class PanelDialog extends javax.swing.JDialog {
     
     private PanelModel _panel;
+    
+    private int _selectedIndex;
 
     /**
      * Creates new form PanelDialog
      */
-    public PanelDialog(java.awt.Frame parent, PanelModel selected) {
+    public PanelDialog(java.awt.Frame parent, PanelModel selected, int selectedIndex) {
         super(parent, true);
         initComponents();
+        this._selectedIndex = selectedIndex;
         if (selected != null) {
             this._panel = selected;
         } else {
@@ -93,7 +96,13 @@ public class PanelDialog extends javax.swing.JDialog {
     private void btn_ok_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ok_pressed
         tf_name.requestFocus(false);
         _panel.setClassName(tf_name.getText());
-        MainFrame.avilablePanels.add(_panel);
+        if (_selectedIndex == -1) {
+            MainFrame.avilablePanels.remove(_panel);
+            MainFrame.avilablePanels.add(_panel);
+        } else {
+            MainFrame.avilablePanels.remove(_panel);
+            MainFrame.avilablePanels.add(_selectedIndex, _panel);
+        }
         this.setVisible(false);
         
     }//GEN-LAST:event_btn_ok_pressed

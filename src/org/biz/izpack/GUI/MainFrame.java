@@ -4,7 +4,6 @@
 package org.biz.izpack.GUI;
 
 import java.awt.Color;
-import java.awt.Panel;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import java.io.FileOutputStream;
@@ -1279,13 +1278,13 @@ public class MainFrame extends javax.swing.JFrame {
         DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)tree_packs.getSelectionPaths()[0].getLastPathComponent();
         Object selected = selectedNode.getUserObject();
         if (selected.toString().equals("packs")) {
-            PackDialog dlg = new PackDialog(this, null);
+            PackDialog dlg = new PackDialog(this, null, -1);
             dlg.setAlwaysOnTop(true);
             dlg.addWindowFocusListener(_packListener);
             dlg.setVisible(true); 
         } else if (selectedNode.getParent().toString().equals("packs")) {
             installation.getPacksModel().getPacks().remove((PackModel)selected);
-            FileDialog dlg = new FileDialog(this, (PackModel)selected, null);
+            FileDialog dlg = new FileDialog(this, (PackModel)selected, null, -1);
             dlg.setAlwaysOnTop(true);
             dlg.addWindowFocusListener(_packListener);
             dlg.setVisible(true); 
@@ -1296,21 +1295,19 @@ public class MainFrame extends javax.swing.JFrame {
     private void btn_editPackorFile_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editPackorFile_pressed
         // Get selected object
         DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode)tree_packs.getSelectionPaths()[0].getLastPathComponent();
+        int index = selectedNode.getParent().getIndex(selectedNode);
         if (selectedNode == null) {
             return;
         }
         Object selected = selectedNode.getUserObject();
         if (selected instanceof PackModel) {
-            installation.getPacksModel().getPacks().remove((PackModel)selected);
-            PackDialog dlg = new PackDialog(this, (PackModel)selected);
+            PackDialog dlg = new PackDialog(this, (PackModel)selected, index);
             dlg.setAlwaysOnTop(true);
             dlg.addWindowFocusListener(_packListener);
             dlg.setVisible(true); 
         } else if (selected instanceof FileModel) {
             PackModel parentPack = (PackModel)((DefaultMutableTreeNode)selectedNode.getParent()).getUserObject();
-            installation.getPacksModel().getPacks().remove(parentPack);
-            parentPack.getFiles().remove((FileModel)selected);
-            FileDialog dlg = new FileDialog(this, parentPack, (FileModel)selected);
+            FileDialog dlg = new FileDialog(this, parentPack, (FileModel)selected, index);
             dlg.setAlwaysOnTop(true);
             dlg.addWindowFocusListener(_packListener);
             dlg.setVisible(true); 
@@ -1421,7 +1418,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_setLower_pressed
 
     private void btn_addPanel_pressed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addPanel_pressed
-        PanelDialog dlg = new PanelDialog(this, null);
+        PanelDialog dlg = new PanelDialog(this, null, -1);
         dlg.setAlwaysOnTop(true);
         dlg.addWindowFocusListener(_panelListener);
         dlg.setVisible(true);
@@ -1436,8 +1433,8 @@ public class MainFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please chose only one item at the same time.", "Multiple selection!", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        avilablePanels.remove(selected.get(0));
-        PanelDialog dlg = new PanelDialog(this, selected.get(0));
+        int index = lst_avilablePanels.getSelectedIndex();
+        PanelDialog dlg = new PanelDialog(this, selected.get(0), index);
         dlg.setAlwaysOnTop(true);
         dlg.addWindowFocusListener(_panelListener);
         dlg.setVisible(true); 

@@ -18,11 +18,12 @@ public class FileDialog extends javax.swing.JDialog {
     private String _fileName;
     private FileModel _file;
     private PackModel _parentNode;
+    private int _selectedIndex;
 
     /**
      * Creates new form FileDialog
      */
-    public FileDialog(java.awt.Frame parent, PackModel parentNode, FileModel selected) {
+    public FileDialog(java.awt.Frame parent, PackModel parentNode, FileModel selected, int index) {
         super(parent, true);
         initComponents();
         this._parentNode = parentNode;
@@ -124,7 +125,13 @@ public class FileDialog extends javax.swing.JDialog {
         tf_targetDir.requestFocus(false);
         _file.setSource(_fileName); 
         _file.setTargetDir(tf_targetDir.getText());
-        _parentNode.getFiles().add(_file);
+        if (_selectedIndex == -1) {
+            _parentNode.getFiles().remove(_file);
+            _parentNode.getFiles().add(_file);
+        } else {
+            _parentNode.getFiles().remove(_file);
+            _parentNode.getFiles().add(_selectedIndex,_file);
+        }
         MainFrame.installation.getPacksModel().getPacks().add(_parentNode);
         this.setVisible(false);
     }//GEN-LAST:event_btn_ok_pressed
